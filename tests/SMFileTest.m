@@ -16,6 +16,7 @@
 #import "NSData+Base64.h"
 #import "SMFileTest.h"
 #import "SMFile.h"
+#import "NSString+StackMob.h"
 
 //#import "application_headers" as required
 
@@ -33,14 +34,19 @@
     NSString *fName = @"test.jpg";
     NSString *contentType = @"image/jpg";
     SMFile *file =  [[SMFile alloc] initWithFileName:fName data:data contentType:contentType];
-    NSString *encodedString = [data base64EncodedString];
+
     
     NSString *expectedResult = [NSString stringWithFormat:@"Content-Type: %@\n\
                                 Content-Disposition: attachment; filename=%@\n\
                                 Content-Transfer-Encoding: %@\n\n\
-                                %@", data, fName, contentType, encodedString];
+                                %@", contentType,
+                                fName, 
+                                @"base64",
+                                [data base64EncodedString]];
     
-    bool result = [expectedResult isEqualToString:[file JSON]];
+    NSString *r = [[file JSON] stringWithoutWhitespaceAndNewLineChars];
+    expectedResult = [expectedResult stringWithoutWhitespaceAndNewLineChars];
+    bool result = [expectedResult isEqualToString:r];
     STAssertTrue(result, @"JSON serialization failed");
     [file release];
 }

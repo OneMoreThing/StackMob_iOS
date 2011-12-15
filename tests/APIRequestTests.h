@@ -23,7 +23,7 @@
 //#import "application_headers" as required
 
 
-@interface APIRequestTests : StackMobTestCase {
+@interface APIRequestTests : StackMobTestCommon {
 
 }
 

@@ -104,6 +104,9 @@
 		C620A8B01454E4AC00FDCF73 /* StackMobQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C620A8A61454E45300FDCF73 /* StackMobQuery.m */; };
 		C620A8B11454E4D500FDCF73 /* RestKitObjectLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C620A8A11454E45200FDCF73 /* RestKitObjectLoader.m */; };
 		C620A8B21454E4D500FDCF73 /* RestKitObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C620A8A31454E45300FDCF73 /* RestKitObjectManager.m */; };
+		C638671F149AA791003A11B1 /* NSString+StackMob.h in Headers */ = {isa = PBXBuildFile; fileRef = C638671D149AA791003A11B1 /* NSString+StackMob.h */; };
+		C6386720149AA791003A11B1 /* NSString+StackMob.m in Sources */ = {isa = PBXBuildFile; fileRef = C638671E149AA791003A11B1 /* NSString+StackMob.m */; };
+		C6386721149AA791003A11B1 /* NSString+StackMob.m in Sources */ = {isa = PBXBuildFile; fileRef = C638671E149AA791003A11B1 /* NSString+StackMob.m */; };
 		C661EE461444019C0029B331 /* DataProviderProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = C661EE351444019B0029B331 /* DataProviderProtocol.h */; };
 		C661EE471444019C0029B331 /* NSArray+StackMob.h in Headers */ = {isa = PBXBuildFile; fileRef = C661EE361444019B0029B331 /* NSArray+StackMob.h */; };
 		C661EE481444019C0029B331 /* NSArray+StackMob.m in Sources */ = {isa = PBXBuildFile; fileRef = C661EE371444019B0029B331 /* NSArray+StackMob.m */; };
@@ -141,12 +144,6 @@
 		C68498C0149981BF009D16FB /* SMGeoPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C68498BA149981BE009D16FB /* SMGeoPoint.m */; };
 		C68498C1149981BF009D16FB /* StackMobBulkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498BB149981BE009D16FB /* StackMobBulkRequest.h */; };
 		C68498C2149981BF009D16FB /* StackMobBulkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C68498BC149981BF009D16FB /* StackMobBulkRequest.m */; };
-		C68498E9149A7E2A009D16FB /* SMFileTest.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498DD149A7E2A009D16FB /* SMFileTest.h */; };
-		C68498EB149A7E2A009D16FB /* StackMobLoginTest.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498DF149A7E2A009D16FB /* StackMobLoginTest.h */; };
-		C68498ED149A7E2A009D16FB /* StackMobPushTests.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498E1149A7E2A009D16FB /* StackMobPushTests.h */; };
-		C68498EF149A7E2A009D16FB /* StackMobQueryTests.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498E3149A7E2A009D16FB /* StackMobQueryTests.h */; };
-		C68498F1149A7E2A009D16FB /* StackMobTestCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498E5149A7E2A009D16FB /* StackMobTestCommon.h */; };
-		C68498F3149A7E2A009D16FB /* StackMobTestUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C68498E7149A7E2A009D16FB /* StackMobTestUtils.h */; };
 		C68498F5149A7EB5009D16FB /* SMFileTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C68498DE149A7E2A009D16FB /* SMFileTest.m */; };
 		C68498F6149A7EB5009D16FB /* StackMobLoginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C68498E0149A7E2A009D16FB /* StackMobLoginTest.m */; };
 		C68498FF149A7EC2009D16FB /* StackMobPushTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C68498E2149A7E2A009D16FB /* StackMobPushTests.m */; };
@@ -287,10 +284,12 @@
 		C620A8A51454E45300FDCF73 /* StackMobQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMobQuery.h; sourceTree = "<group>"; };
 		C620A8A61454E45300FDCF73 /* StackMobQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackMobQuery.m; sourceTree = "<group>"; };
 		C620A8A71454E45400FDCF73 /* StackMobVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMobVersion.h; sourceTree = "<group>"; };
+		C638671D149AA791003A11B1 /* NSString+StackMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StackMob.h"; sourceTree = "<group>"; };
+		C638671E149AA791003A11B1 /* NSString+StackMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StackMob.m"; sourceTree = "<group>"; };
 		C661EDFE144400EF0029B331 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = StackMob/External/libraries/RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		C661EE351444019B0029B331 /* DataProviderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProviderProtocol.h; sourceTree = "<group>"; };
-		C661EE361444019B0029B331 /* NSArray+StackMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+StackMob.h"; sourceTree = "<group>"; };
-		C661EE371444019B0029B331 /* NSArray+StackMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+StackMob.m"; sourceTree = "<group>"; };
+		C661EE361444019B0029B331 /* NSArray+StackMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+StackMob.h"; path = "../NSArray+StackMob.h"; sourceTree = "<group>"; };
+		C661EE371444019B0029B331 /* NSArray+StackMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+StackMob.m"; path = "../NSArray+StackMob.m"; sourceTree = "<group>"; };
 		C661EE381444019B0029B331 /* NSDictionary+StackMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+StackMob.h"; sourceTree = "<group>"; };
 		C661EE391444019B0029B331 /* NSDictionary+StackMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+StackMob.m"; sourceTree = "<group>"; };
 		C661EE3A1444019B0029B331 /* RestKitConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestKitConfiguration.h; sourceTree = "<group>"; };
@@ -392,6 +391,7 @@
 		038CB1AA14283272001DEAC9 /* StackMob */ = {
 			isa = PBXGroup;
 			children = (
+				C6386722149AA83B003A11B1 /* ObjectMapping */,
 				038CB1DE14283272001DEAC9 /* Utils */,
 				038CB1AB14283272001DEAC9 /* External */,
 				C68498B7149981BE009D16FB /* SMFile.h */,
@@ -401,8 +401,6 @@
 				C68498BB149981BE009D16FB /* StackMobBulkRequest.h */,
 				C68498BC149981BF009D16FB /* StackMobBulkRequest.m */,
 				C661EE351444019B0029B331 /* DataProviderProtocol.h */,
-				C661EE361444019B0029B331 /* NSArray+StackMob.h */,
-				C661EE371444019B0029B331 /* NSArray+StackMob.m */,
 				C661EE381444019B0029B331 /* NSDictionary+StackMob.h */,
 				C661EE391444019B0029B331 /* NSDictionary+StackMob.m */,
 				C661EE3A1444019B0029B331 /* RestKitConfiguration.h */,
@@ -523,6 +521,10 @@
 				038CB1E214283272001DEAC9 /* NSData+JSON.m */,
 				C670D9B114441F8D009CC39A /* RKObjectRouter+StackMob.h */,
 				C670D9B214441F8D009CC39A /* RKObjectRouter+StackMob.m */,
+				C638671D149AA791003A11B1 /* NSString+StackMob.h */,
+				C638671E149AA791003A11B1 /* NSString+StackMob.m */,
+				C661EE361444019B0029B331 /* NSArray+StackMob.h */,
+				C661EE371444019B0029B331 /* NSArray+StackMob.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -603,6 +605,13 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		C6386722149AA83B003A11B1 /* ObjectMapping */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ObjectMapping;
+			sourceTree = "<group>";
+		};
 		C661EDFF144400EF0029B331 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -675,13 +684,8 @@
 				C68498BD149981BF009D16FB /* SMFile.h in Headers */,
 				C68498BF149981BF009D16FB /* SMGeoPoint.h in Headers */,
 				C68498C1149981BF009D16FB /* StackMobBulkRequest.h in Headers */,
-				C68498E9149A7E2A009D16FB /* SMFileTest.h in Headers */,
-				C68498EB149A7E2A009D16FB /* StackMobLoginTest.h in Headers */,
-				C68498ED149A7E2A009D16FB /* StackMobPushTests.h in Headers */,
-				C68498EF149A7E2A009D16FB /* StackMobQueryTests.h in Headers */,
-				C68498F1149A7E2A009D16FB /* StackMobTestCommon.h in Headers */,
-				C68498F3149A7E2A009D16FB /* StackMobTestUtils.h in Headers */,
 				C6849913149A99A3009D16FB /* JSONKit.h in Headers */,
+				C638671F149AA791003A11B1 /* NSString+StackMob.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +881,7 @@
 				C6849908149A81DD009D16FB /* StackMobBulkRequest.m in Sources */,
 				C6849909149A824E009D16FB /* SMFile.m in Sources */,
 				C6849915149A9A0C009D16FB /* SMGeoPoint.m in Sources */,
+				C6386721149AA791003A11B1 /* NSString+StackMob.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +926,7 @@
 				C68498BE149981BF009D16FB /* SMFile.m in Sources */,
 				C68498C0149981BF009D16FB /* SMGeoPoint.m in Sources */,
 				C68498C2149981BF009D16FB /* StackMobBulkRequest.m in Sources */,
+				C6386720149AA791003A11B1 /* NSString+StackMob.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,15 +954,9 @@
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/StackMobiOS.dst;
 				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 					"$(inherited)",
-					"\"$(SRCROOT)/external/libraries\"",
 					"\"$(SRCROOT)/build/Framework\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Vendor/LibComponentLogging\"/**",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Support\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Network\"",
-					"\"$(SRCROOT)/StackMob/External/libraries\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/ObjectMapping\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/CoreData\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -974,6 +974,17 @@
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/external/libraries\"",
+					"\"$(SRCROOT)/build/Framework\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Vendor/LibComponentLogging\"/**",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Support\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Network\"",
+					"\"$(SRCROOT)/StackMob/External/libraries\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/ObjectMapping\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/CoreData\"",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = StackMobiOS;
@@ -989,15 +1000,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/StackMobiOS.dst;
 				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 					"$(inherited)",
-					"\"$(SRCROOT)/external/libraries\"",
 					"\"$(SRCROOT)/build/Framework\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Vendor/LibComponentLogging\"/**",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Support\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Network\"",
-					"\"$(SRCROOT)/StackMob/External/libraries\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/ObjectMapping\"",
-					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/CoreData\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1012,6 +1017,17 @@
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/external/libraries\"",
+					"\"$(SRCROOT)/build/Framework\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Vendor/LibComponentLogging\"/**",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Support\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/Network\"",
+					"\"$(SRCROOT)/StackMob/External/libraries\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/ObjectMapping\"",
+					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/CoreData\"",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = StackMobiOS;
@@ -1085,6 +1101,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Framework\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = StackMobiOS_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/external/libraries\"",
 					"\"$(SRCROOT)/build/Framework\"",
@@ -1095,11 +1121,6 @@
 					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/ObjectMapping\"",
 					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/CoreData\"",
 				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = StackMobiOS_Prefix.pch;
 				INFOPLIST_FILE = "$(TESTPLISTDIR)Tests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1112,7 +1133,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Tests;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/build/Framework\"";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1125,6 +1146,14 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Framework\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREFIX_HEADER = StackMobiOS_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/external/libraries\"",
 					"\"$(SRCROOT)/build/Framework\"",
@@ -1135,9 +1164,6 @@
 					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/ObjectMapping\"",
 					"\"$(SRCROOT)/StackMob/External/libraries/RestKit/Code/CoreData\"",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREFIX_HEADER = StackMobiOS_Prefix.pch;
 				INFOPLIST_FILE = "$(TESTPLISTDIR)Tests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1150,7 +1176,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Tests;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/build/Framework\"";
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
 			};

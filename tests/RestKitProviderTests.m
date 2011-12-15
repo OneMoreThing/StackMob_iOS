@@ -17,6 +17,7 @@
 //#import "application_headers" as required
 
 @implementation RestKitProviderTests
+@synthesize session;
 
 // All code under test is in the iOS Application
 - (void)testUserPost
