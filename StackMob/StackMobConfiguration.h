@@ -20,11 +20,11 @@
     #define StackMobDebug(format, ...) {NSLog([[NSString stringWithFormat:@"[%s, %@, %d] ", __PRETTY_FUNCTION__, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__] stringByAppendingFormat:format, ##__VA_ARGS__]);}
 #endif
 
+
 #define STACKMOB_PUBLIC_KEY         @"YOUR_PUBLIC_KEY"
 #define STACKMOB_PRIVATE_KEY        @"YOUR_PRIVATE_KEY"
 #define STACKMOB_APP_NAME           @"YOUR_APP_NAME"
 #define STACKMOB_APP_SUBDOMAIN      @"YOUR_SUBDOMAIN"
 #define STACKMOB_APP_DOMAIN         @"stackmob.com"
-#define STACKMOB_USER_OBJECT_NAME   @"YOUR_USER_OBJECT_NAME"
-
+#define STACKMOB_USER_OBJECT_NAME   @"user"
 #define STACKMOB_API_VERSION        0

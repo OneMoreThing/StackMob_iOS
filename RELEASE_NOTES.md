@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.4.1
+* Support for cascading delete in the Relations API
+* SMFile for file uploads with different content types and file names
+* Improved Memory Management
+* Fix for lost auth cookie
+
 ## 0.4.0
 * Support for Geo-Queries
 * Relations API Extensions Support
