@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import "StackMobSession.h"
-#import "StackMobDataProvider.h"
+#import "STMDataProvider.h"
 
 @interface StackMobSession(Private)
 - (void)setup;

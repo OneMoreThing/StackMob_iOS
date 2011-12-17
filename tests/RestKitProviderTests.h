@@ -12,9 +12,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "StackMobTestCommon.h"
 
-@class RestKitConfiguration;
+@class STMRestKitConfiguration;
 @interface RestKitProviderTests : StackMobTestCommon
 
 @property (nonatomic, assign) StackMobSession *session;
-- (RestKitConfiguration *) config;
+- (STMRestKitConfiguration *) config;
 @end

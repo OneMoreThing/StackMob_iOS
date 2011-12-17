@@ -17,7 +17,7 @@
 #import "StackMobVersion.h"
 
 static NSString *const SMDefaultDomain = @"stackmob.com";
-@class StackMobDataProvider;
+@class STMDynamicDataProvider;
 
 @interface StackMobSession : NSObject {
     NSString *url;

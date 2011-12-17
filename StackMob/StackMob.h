@@ -15,7 +15,7 @@
 #import <Foundation/Foundation.h>
 #import "StackMobSession.h"
 #import "StackMobRequest.h"
-#import "DataProviderProtocol.h"
+#import "STMDataProvider.h"
 
 typedef enum {
     SMEnvironmentProduction = 0,
@@ -24,7 +24,7 @@ typedef enum {
 
 
 typedef void (^StackMobCallback)(BOOL success, id result);
-@class StackMobDataProvider;
+@class STMDynamicDataProvider;
 
 @interface StackMob : NSObject <SMRequestDelegate>{
     NSMutableArray *callbacks;
@@ -32,7 +32,7 @@ typedef void (^StackMobCallback)(BOOL success, id result);
     StackMobSession *session;
     StackMobRequest *currentRequest;
     BOOL _running;
-    id<DataProviderProtocol> _dataProvider;
+    id<STMDataProvider> _dataProvider;
 }
 
 @property (nonatomic, retain) StackMobSession *session;
@@ -44,7 +44,7 @@ typedef void (^StackMobCallback)(BOOL success, id result);
  * Data bridge which handles network, data mapping, and serialization 
  * features.
  */
-@property(nonatomic,retain) id<DataProviderProtocol> dataProvider;
+@property(nonatomic,retain) id<STMDataProvider> dataProvider;
 
 /*
  * Manually configure your session.  Subsequent requests for the StackMob
@@ -65,7 +65,15 @@ typedef void (^StackMobCallback)(BOOL success, id result);
 + (StackMob *)setApplication:(NSString *)apiKey secret:(NSString *)apiSecret 
                      appName:(NSString *)appName subDomain:(NSString *)subDomain 
               userObjectName:(NSString *)userObjectName apiVersionNumber:(NSNumber *)apiVersion
-                  dataProvider:(id<DataProviderProtocol>)dataProvider;
+                  dataProvider:(id<STMDataProvider>)dataProvider;
+
+
+/*
+ * Manually configure your session using a configuration object.  Subsequent requests for the StackMob
+ * singleton can use [StackMob stackmob].
+ */
+
++ (StackMob *)setApplicationConfiguration:(StackMobConfiguration *)configuration;
 
 /** Sets the stackmob shared object. Set to nil to reset stackmob singleton. */
 + (void) setSharedManager:(StackMob *)stackMob;

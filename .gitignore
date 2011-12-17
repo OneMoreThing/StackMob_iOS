@@ -19,6 +19,7 @@ build/**/*
 
 # Configuration
 configuration/*
+Demo/ReskitDemoApp/ReskitDemoApp/configuration/*
 
 # XCode user local
 StackMobiOS.xcodeproj/xcuserdata/**/*

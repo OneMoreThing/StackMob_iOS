@@ -2,22 +2,53 @@
 //  AppDelegate.m
 //  ReskitDemoApp
 //
-//  Created by Erica Connelly on 11/3/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Ryan Connelly on 11/3/11.
+//  Copyright (c) 2011 StackMob, Inc. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "StackMob/STMRestKitConfiguration.h"
+#import "UserModel.h"
+#import "StackMob/StackMob.h"
+
+#import "StackMob/STMRestKitDataProvider.h"
+#import "StackMob/STMResponseError.h"
+#import "StackMob/STMObjectMappingProvider.h"
+#import "StackMob/STMClient.h"
+#import "StackMob/STMObjectRouter.h"
+#import "StackMob/STMObjectMapping.h"
+
+@interface AppDelegate()
+- (STMRestKitConfiguration *) newConfig;
+@end
 
 @implementation AppDelegate
-
 @synthesize window = _window;
+
+- (STMRestKitConfiguration *) newConfig
+{
+    STMRestKitConfiguration *config = [STMRestKitConfiguration configuration];
+    NSArray *mappings = [STMObjectMapping defaultMappingsForClasses:[UserModel class], nil];
+    [config.mappingProvider registerObjectMappings:mappings];
+    return config;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    STMRestKitConfiguration *config = [self newConfig];
     // Override point for customization after application launch.
+    id<STMDataProvider> dataProvider = [STMRestkitDataProvider dataProviderWithConfiguration:config];
+    
+    [StackMob setApplication:STACKMOB_PUBLIC_KEY
+                      secret:STACKMOB_PRIVATE_KEY
+                     appName:STACKMOB_APP_NAME
+                   subDomain:STACKMOB_APP_SUBDOMAIN
+              userObjectName:STACKMOB_USER_OBJECT_NAME
+            apiVersionNumber:[NSNumber numberWithInt:STACKMOB_API_VERSION]
+                dataProvider:dataProvider];
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
@@ -56,5 +87,6 @@
      See also applicationDidEnterBackground:.
      */
 }
+
 
 @end

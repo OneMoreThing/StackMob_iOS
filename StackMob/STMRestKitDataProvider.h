@@ -12,16 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@protocol STMDataProviderProtocol;
+#import "STMDataProvider.h"
 
-@interface StackMobConfiguration : NSObject 
-@property (nonatomic, retain) NSString *publicKey;
-@property (nonatomic, retain) NSString *privateKey;
-@property (nonatomic, retain) NSString *appName;
-@property (nonatomic, retain) NSString *subdomain;
-@property (nonatomic, retain) NSString *domain;
-@property (nonatomic, retain) NSString *userObjectName;
-@property (nonatomic, retain) NSNumber *apiVersion;
-@property (nonatomic, retain) id dataProvider;
+@class STMRestKitConfiguration;
+@interface STMRestkitDataProvider : NSObject <STMDataProvider> 
+{
+    STMRestKitConfiguration *restKitConfiguration;
+}
+
+- (id) initWithConfiguration:(STMRestKitConfiguration *)config;
++ (id) dataProviderWithConfiguration:(STMRestKitConfiguration *)config;
+
+@property (nonatomic,retain) STMRestKitConfiguration *restKitConfiguration;
 
 @end

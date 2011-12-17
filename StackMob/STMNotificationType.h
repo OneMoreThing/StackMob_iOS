@@ -12,16 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@protocol STMDataProviderProtocol;
-
-@interface StackMobConfiguration : NSObject 
-@property (nonatomic, retain) NSString *publicKey;
-@property (nonatomic, retain) NSString *privateKey;
-@property (nonatomic, retain) NSString *appName;
-@property (nonatomic, retain) NSString *subdomain;
-@property (nonatomic, retain) NSString *domain;
-@property (nonatomic, retain) NSString *userObjectName;
-@property (nonatomic, retain) NSNumber *apiVersion;
-@property (nonatomic, retain) id dataProvider;
-
-@end
+typedef enum 
+{
+    ALERT_PUSH_NOTIFICATION,
+    BADGE_PUSH_NOTIFICATION,
+    SOUND_PUSH_NOTIFICATION
+}
+STMNotificationType;

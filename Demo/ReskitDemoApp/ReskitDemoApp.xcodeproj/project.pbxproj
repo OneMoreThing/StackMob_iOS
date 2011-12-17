@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C6386756149AB3FC003A11B1 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6386755149AB3FC003A11B1 /* UserModel.m */; };
+		C6386761149AB9F7003A11B1 /* briefcase.png in Resources */ = {isa = PBXBuildFile; fileRef = C638675D149AB9F7003A11B1 /* briefcase.png */; };
+		C6386762149AB9F7003A11B1 /* briefcase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C638675E149AB9F7003A11B1 /* briefcase@2x.png */; };
+		C6386763149AB9F7003A11B1 /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = C638675F149AB9F7003A11B1 /* man.png */; };
+		C6386764149AB9F7003A11B1 /* man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6386760149AB9F7003A11B1 /* man@2x.png */; };
+		C638676B149ABE34003A11B1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C638676A149ABE34003A11B1 /* CFNetwork.framework */; };
+		C638676D149ABE60003A11B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C638676C149ABE60003A11B1 /* CoreData.framework */; };
+		C638676F149ABE80003A11B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C638676E149ABE80003A11B1 /* Security.framework */; };
+		C6386771149ABE8E003A11B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6386770149ABE8D003A11B1 /* MobileCoreServices.framework */; };
+		C6386773149ABE99003A11B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6386772149ABE99003A11B1 /* SystemConfiguration.framework */; };
+		C6386776149AC7F2003A11B1 /* CompanyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6386775149AC7F2003A11B1 /* CompanyDetailsViewController.m */; };
+		C638678D149AD0FD003A11B1 /* UserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6386778149AC987003A11B1 /* UserDetailsViewController.m */; };
+		C638678E149AD8D9003A11B1 /* libStackMobiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B7AF1462721D0007E83E /* libStackMobiOS.a */; };
+		C6386794149AD988003A11B1 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6386793149AD988003A11B1 /* libxml2.dylib */; };
+		C63867CB149C3109003A11B1 /* RoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C63867CA149C3109003A11B1 /* RoleModel.m */; };
 		C648B739146270580007E83E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B738146270580007E83E /* UIKit.framework */; };
 		C648B73B146270580007E83E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B73A146270580007E83E /* Foundation.framework */; };
 		C648B73D146270580007E83E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B73C146270580007E83E /* CoreGraphics.framework */; };
@@ -14,10 +29,10 @@
 		C648B745146270580007E83E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B744146270580007E83E /* main.m */; };
 		C648B749146270580007E83E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B748146270580007E83E /* AppDelegate.m */; };
 		C648B74C146270580007E83E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C648B74A146270580007E83E /* MainStoryboard.storyboard */; };
-		C648B74F146270580007E83E /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B74E146270580007E83E /* FirstViewController.m */; };
+		C648B74F146270580007E83E /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B74E146270580007E83E /* UserViewController.m */; };
 		C648B751146270580007E83E /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = C648B750146270580007E83E /* first.png */; };
 		C648B753146270580007E83E /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C648B752146270580007E83E /* first@2x.png */; };
-		C648B756146270580007E83E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B755146270580007E83E /* SecondViewController.m */; };
+		C648B756146270580007E83E /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B755146270580007E83E /* CompanyViewController.m */; };
 		C648B758146270580007E83E /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = C648B757146270580007E83E /* second.png */; };
 		C648B75A146270580007E83E /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C648B759146270580007E83E /* second@2x.png */; };
 		C648B762146270580007E83E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B761146270580007E83E /* SenTestingKit.framework */; };
@@ -28,6 +43,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C6386765149ABBFE003A11B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C648B79F1462721D0007E83E /* StackMobiOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = StackMob;
+		};
 		C648B765146270580007E83E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C648B72B146270580007E83E /* Project object */;
@@ -52,6 +74,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C6386754149AB3FC003A11B1 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		C6386755149AB3FC003A11B1 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		C638675D149AB9F7003A11B1 /* briefcase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = briefcase.png; sourceTree = "<group>"; };
+		C638675E149AB9F7003A11B1 /* briefcase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "briefcase@2x.png"; sourceTree = "<group>"; };
+		C638675F149AB9F7003A11B1 /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
+		C6386760149AB9F7003A11B1 /* man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man@2x.png"; sourceTree = "<group>"; };
+		C638676A149ABE34003A11B1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C638676C149ABE60003A11B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C638676E149ABE80003A11B1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C6386770149ABE8D003A11B1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C6386772149ABE99003A11B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C6386774149AC7F2003A11B1 /* CompanyDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyDetailsViewController.h; sourceTree = "<group>"; };
+		C6386775149AC7F2003A11B1 /* CompanyDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailsViewController.m; sourceTree = "<group>"; };
+		C6386777149AC987003A11B1 /* UserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailsViewController.h; sourceTree = "<group>"; };
+		C6386778149AC987003A11B1 /* UserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailsViewController.m; sourceTree = "<group>"; };
+		C6386793149AD988003A11B1 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		C63867C9149C3109003A11B1 /* RoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleModel.h; sourceTree = "<group>"; };
+		C63867CA149C3109003A11B1 /* RoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleModel.m; sourceTree = "<group>"; };
 		C648B734146270580007E83E /* ReskitDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReskitDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C648B738146270580007E83E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C648B73A146270580007E83E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,12 +103,12 @@
 		C648B747146270580007E83E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C648B748146270580007E83E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C648B74B146270580007E83E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		C648B74D146270580007E83E /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		C648B74E146270580007E83E /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		C648B74D146270580007E83E /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		C648B74E146270580007E83E /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		C648B750146270580007E83E /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		C648B752146270580007E83E /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		C648B754146270580007E83E /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		C648B755146270580007E83E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		C648B754146270580007E83E /* CompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
+		C648B755146270580007E83E /* CompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
 		C648B757146270580007E83E /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		C648B759146270580007E83E /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		C648B760146270580007E83E /* ReskitDemoAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReskitDemoAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +125,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6386794149AD988003A11B1 /* libxml2.dylib in Frameworks */,
+				C638678E149AD8D9003A11B1 /* libStackMobiOS.a in Frameworks */,
+				C6386773149ABE99003A11B1 /* SystemConfiguration.framework in Frameworks */,
+				C6386771149ABE8E003A11B1 /* MobileCoreServices.framework in Frameworks */,
+				C638676F149ABE80003A11B1 /* Security.framework in Frameworks */,
+				C638676D149ABE60003A11B1 /* CoreData.framework in Frameworks */,
+				C638676B149ABE34003A11B1 /* CFNetwork.framework in Frameworks */,
 				C648B739146270580007E83E /* UIKit.framework in Frameworks */,
 				C648B73B146270580007E83E /* Foundation.framework in Frameworks */,
 				C648B73D146270580007E83E /* CoreGraphics.framework in Frameworks */,
@@ -104,6 +151,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C638675A149AB747003A11B1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C648B74D146270580007E83E /* UserViewController.h */,
+				C648B74E146270580007E83E /* UserViewController.m */,
+				C648B754146270580007E83E /* CompanyViewController.h */,
+				C648B755146270580007E83E /* CompanyViewController.m */,
+				C6386774149AC7F2003A11B1 /* CompanyDetailsViewController.h */,
+				C6386775149AC7F2003A11B1 /* CompanyDetailsViewController.m */,
+				C6386777149AC987003A11B1 /* UserDetailsViewController.h */,
+				C6386778149AC987003A11B1 /* UserDetailsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C638675B149AB74F003A11B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C6386754149AB3FC003A11B1 /* UserModel.h */,
+				C6386755149AB3FC003A11B1 /* UserModel.m */,
+				C63867C9149C3109003A11B1 /* RoleModel.h */,
+				C63867CA149C3109003A11B1 /* RoleModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C638675C149AB76A003A11B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C638675D149AB9F7003A11B1 /* briefcase.png */,
+				C638675E149AB9F7003A11B1 /* briefcase@2x.png */,
+				C638675F149AB9F7003A11B1 /* man.png */,
+				C6386760149AB9F7003A11B1 /* man@2x.png */,
+				C648B750146270580007E83E /* first.png */,
+				C648B752146270580007E83E /* first@2x.png */,
+				C648B757146270580007E83E /* second.png */,
+				C648B759146270580007E83E /* second@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		C648B729146270580007E83E = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +218,13 @@
 				C648B738146270580007E83E /* UIKit.framework */,
 				C648B73A146270580007E83E /* Foundation.framework */,
 				C648B73C146270580007E83E /* CoreGraphics.framework */,
+				C638676A149ABE34003A11B1 /* CFNetwork.framework */,
 				C648B761146270580007E83E /* SenTestingKit.framework */,
+				C6386772149ABE99003A11B1 /* SystemConfiguration.framework */,
+				C6386770149ABE8D003A11B1 /* MobileCoreServices.framework */,
+				C638676E149ABE80003A11B1 /* Security.framework */,
+				C638676C149ABE60003A11B1 /* CoreData.framework */,
+				C6386793149AD988003A11B1 /* libxml2.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,18 +232,13 @@
 		C648B73E146270580007E83E /* ReskitDemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				C638675C149AB76A003A11B1 /* Resources */,
+				C638675B149AB74F003A11B1 /* Models */,
+				C638675A149AB747003A11B1 /* Controllers */,
+				C648B73F146270580007E83E /* Supporting Files */,
 				C648B747146270580007E83E /* AppDelegate.h */,
 				C648B748146270580007E83E /* AppDelegate.m */,
 				C648B74A146270580007E83E /* MainStoryboard.storyboard */,
-				C648B74D146270580007E83E /* FirstViewController.h */,
-				C648B74E146270580007E83E /* FirstViewController.m */,
-				C648B750146270580007E83E /* first.png */,
-				C648B752146270580007E83E /* first@2x.png */,
-				C648B754146270580007E83E /* SecondViewController.h */,
-				C648B755146270580007E83E /* SecondViewController.m */,
-				C648B757146270580007E83E /* second.png */,
-				C648B759146270580007E83E /* second@2x.png */,
-				C648B73F146270580007E83E /* Supporting Files */,
 			);
 			path = ReskitDemoApp;
 			sourceTree = "<group>";
@@ -207,6 +296,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C6386766149ABBFE003A11B1 /* PBXTargetDependency */,
 			);
 			name = ReskitDemoApp;
 			productName = ReskitDemoApp;
@@ -292,6 +382,10 @@
 				C648B753146270580007E83E /* first@2x.png in Resources */,
 				C648B758146270580007E83E /* second.png in Resources */,
 				C648B75A146270580007E83E /* second@2x.png in Resources */,
+				C6386761149AB9F7003A11B1 /* briefcase.png in Resources */,
+				C6386762149AB9F7003A11B1 /* briefcase@2x.png in Resources */,
+				C6386763149AB9F7003A11B1 /* man.png in Resources */,
+				C6386764149AB9F7003A11B1 /* man@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,8 +422,12 @@
 			files = (
 				C648B745146270580007E83E /* main.m in Sources */,
 				C648B749146270580007E83E /* AppDelegate.m in Sources */,
-				C648B74F146270580007E83E /* FirstViewController.m in Sources */,
-				C648B756146270580007E83E /* SecondViewController.m in Sources */,
+				C648B74F146270580007E83E /* UserViewController.m in Sources */,
+				C648B756146270580007E83E /* CompanyViewController.m in Sources */,
+				C6386756149AB3FC003A11B1 /* UserModel.m in Sources */,
+				C6386776149AC7F2003A11B1 /* CompanyDetailsViewController.m in Sources */,
+				C638678D149AD0FD003A11B1 /* UserDetailsViewController.m in Sources */,
+				C63867CB149C3109003A11B1 /* RoleModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +442,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C6386766149ABBFE003A11B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StackMob;
+			targetProxy = C6386765149ABBFE003A11B1 /* PBXContainerItemProxy */;
+		};
 		C648B766146270580007E83E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C648B733146270580007E83E /* ReskitDemoApp */;
@@ -400,6 +503,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -419,6 +523,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -429,7 +534,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReskitDemoApp/ReskitDemoApp-Prefix.pch";
-				INFOPLIST_FILE = "ReskitDemoApp/ReskitDemoApp-Info.plist";
+				HEADER_SEARCH_PATHS = (
+					"$(inherit)",
+					"\"$(SRCROOT)/../../\"",
+					"\"$(SRCROOT)/../../StackMob/External/libraries/RestKit/Vendor\"/**",
+				);
+				INFOPLIST_FILE = "ReskitDemoApp/$(TEST_PLIST_DIR)ReskitDemoApp-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -440,7 +551,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReskitDemoApp/ReskitDemoApp-Prefix.pch";
-				INFOPLIST_FILE = "ReskitDemoApp/ReskitDemoApp-Info.plist";
+				HEADER_SEARCH_PATHS = (
+					"$(inherit)",
+					"\"$(SRCROOT)/../../\"",
+					"\"$(SRCROOT)/../../StackMob/External/libraries/RestKit/Vendor\"/**",
+				);
+				INFOPLIST_FILE = "ReskitDemoApp/$(TEST_PLIST_DIR)ReskitDemoApp-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
