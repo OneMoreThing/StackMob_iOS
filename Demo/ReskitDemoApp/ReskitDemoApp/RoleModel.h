@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSNumber *lastModDate;
 @property (nonatomic, strong) NSNumber *createDate;
+@property (nonatomic, strong) NSString *roleId;
 @end

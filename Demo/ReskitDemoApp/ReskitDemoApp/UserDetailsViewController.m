@@ -7,14 +7,16 @@
 //
 
 #import "UserDetailsViewController.h"
-
+#import "UserModel.h"
 
 @implementation UserDetailsViewController
+@synthesize user;
 @synthesize roleTextField;
 @synthesize nameTextField;
 @synthesize userNameTextField;
 @synthesize emailTextField;
 @synthesize passwordTextField;
+@synthesize password2TextField;
 @synthesize delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -39,12 +41,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if(self.user)
+    {
+        self.emailTextField.text = self.user.email;
+        self.nameTextField.text = self.user.name;
+        self.passwordTextField.text = @"****";
+        self.password2TextField.text = @"****";
+        self.userNameTextField.text = self.user.userName;
+    }
+    
+    self.userNameTextField.enabled = self.user == nil;
+    self.passwordTextField.enabled = self.user == nil;
+    self.password2TextField.enabled = self.user == nil;
 }
 
 - (void)viewDidUnload
@@ -85,14 +100,22 @@
 
 #pragma mark - Table view delegate
 
-
-
-
-- (IBAction)cancel:(id)sender {
-    [delegate userDetailsViewControllerDidCancel:self];
+- (IBAction)cancel:(id)sender
+{
+    if(self.user)
+    {
+        [delegate userDetailsViewControllerDidCancelEdit:self];
+    } else {
+        [delegate userDetailsViewControllerDidCancelAdd:self];
+    }
 }
 
 - (IBAction)save:(id)sender {
-    [delegate userDetailsViewControllerDidSave:self];
+    if(self.user)
+    {
+        [delegate userDetailsViewControllerDidSave:self];
+    } else {
+        [delegate userDetailsViewControllerDidAdd:self];
+    }
 }
 @end

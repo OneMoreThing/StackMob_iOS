@@ -15,6 +15,7 @@
     RKObjectLoader* objectLoader = nil;
     Class managedObjectLoaderClass = NSClassFromString(@"RKManagedObjectLoader");
     if (self.objectStore && managedObjectLoaderClass) {
+        // To do: Handle loader class
         objectLoader = [managedObjectLoaderClass loaderWithResourcePath:resourcePath objectManager:self delegate:delegate];
     } else {
         objectLoader = [STMRestKitObjectLoader loaderWithResourcePath:resourcePath objectManager:self delegate:delegate];

@@ -12,12 +12,16 @@
 #import "StackMobSession.h"
 #import "STMRestKitObjectLoaderDelegate.h"
 #import "STMRestKitObjectLoader.h"
+#import "STMObjectRouter.h"
 #import "STMRestKitObjectManager.h"
+#import "STMRestKitDataProvider.h"
+#import "STMRestKitConfiguration.h"
 
 @interface STMRestKitRequest (Private)
 - (RKRequestMethod) requestMethodFromString:(NSString *)verb;
 - (STMRestKitObjectLoaderDelegate *) newLoaderDelegate:(id<SMRequestDelegate>)requestDelegate;
 - (NSString *)baseUrlWithSession:(StackMobSession *)sess;
++ (NSString *) expandRelativePath:(NSString *)path isUserBased:(BOOL)isUserBased;
 @end
 
 @implementation STMRestKitRequest
@@ -73,6 +77,19 @@
     return request;
 }
 
+/* Returns the full url based on a path */
++ (NSString *) expandRelativePath:(NSString *)path isUserBased:(BOOL)isUserBased
+{
+    StackMobSession *sess = [[StackMob stackmob] session];
+    NSString *fullRelativePath = [[NSURL URLWithString:sess.apiURL] relativePath];    
+    if(isUserBased)
+    {
+        fullRelativePath = [fullRelativePath stringByAppendingFormat:@"/%@",sess.userObjectName];
+    }
+    fullRelativePath = [fullRelativePath stringByAppendingFormat:@"/%@",path];
+    return fullRelativePath;
+}
+
 + (id)requestForMethod:(NSString*)method
 {
 	return [self requestForMethod:method withHttpVerb:GET];
@@ -88,19 +105,60 @@
 	return [self userRequestForMethod:method withObject:nil withHttpVerb:httpVerb];    
 }
 
++ (RKRequestMethod) requestMethodFromHttpVerb:(SMHttpVerb)verb
+{
+    switch (verb) {
+        case GET:
+            return RKRequestMethodGET;
+            break;
+        case POST:
+            return RKRequestMethodPOST;
+        case PUT:
+            return RKRequestMethodPUT;
+        case DELETE:
+            return RKRequestMethodDELETE;
+        default:
+            return RKRequestMethodGET;
+            break;
+    }
+}
+
 + (id)requestForMethod:(NSString*)method withObject:(id)object withHttpVerb:(SMHttpVerb)httpVerb
 {
     STMRestKitRequest *request = [STMRestKitRequest request];
     request.method = method;
-    [request setObject:object];
+    if(object)
+    {
+        [request setObject:object];
+    }
+    else // infer object from path
+    {
+        STMRestkitDataProvider *provider = [StackMob stackmob].dataProvider;
+        STMObjectRouter *router = provider.restKitConfiguration.router;
+        NSString *fullPath = [self expandRelativePath:method isUserBased:NO];
+        Class objectClass = [router classByResourcePath:fullPath forHttpVerb:[self requestMethodFromHttpVerb:httpVerb]];
+        [request setObject:[[[objectClass alloc] init] autorelease]];
+    }
     request.httpMethod = [self stringFromHttpVerb:httpVerb];
     return request;
 }
 
 + (id)userRequestForMethod:(NSString*)method withObject:(id)object withHttpVerb:(SMHttpVerb)httpVerb
 {
-    STMRestKitRequest *request = [self requestForMethod:method withObject:object withHttpVerb:httpVerb];
+    STMRestKitRequest *request = [STMRestKitRequest request];
     request.userBased = YES;
+    request.method = method;
+    if(object)
+    {
+        [request setObject:object];
+    }
+    else
+    {
+        STMRestkitDataProvider *provider = [StackMob stackmob].dataProvider;
+        NSString *fullPath = [self expandRelativePath:method isUserBased:YES];
+        RKObjectMapping *mapping = [provider.restKitConfiguration.mappingProvider objectMappingForKeyPath:fullPath];
+        [request setObject:[[[mapping.objectClass alloc] init] autorelease]];
+    }
     return request;
 }
 

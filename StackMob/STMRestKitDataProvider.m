@@ -23,7 +23,7 @@
 #import "STMObjectRouter.h"
 
 @interface STMRestkitDataProvider (Private)
-- (void) prepareRouter:(RKObjectRouter *)router withRequest:(STMRestKitRequest *)request;
+- (void) prepareRouter:(RKObjectRouter *)router;
 @end
 
 @implementation STMRestkitDataProvider
@@ -50,8 +50,19 @@
     if(self)
     {
         restKitConfiguration = [config retain];
+        
+    
     }
     return self;
+}
+
+// called after session has been created
+- (void) prepare
+{
+    if(restKitConfiguration.router)
+    {
+        [self prepareRouter:restKitConfiguration.router];
+    }
 }
 
 + (id) dataProviderWithConfiguration:(STMRestKitConfiguration *)config
@@ -72,7 +83,6 @@
     if([self.restKitConfiguration router])
     {
         request.objectManager.router = [self.restKitConfiguration router];
-        [self prepareRouter:request.objectManager.router withRequest:request];
     }
     
     request.objectManager.inferMappingsFromObjectTypes = self.restKitConfiguration.inferMappingsFromObjectTypes;
@@ -80,15 +90,11 @@
 
 /* Appends the base path to the relative path. Required because RestKit OAuth expects 
    the full relative path. */
-- (void) prepareRouter:(RKObjectRouter *)router withRequest:(STMRestKitRequest *)request
+- (void) prepareRouter:(RKObjectRouter *)router 
 {   
     StackMobSession *sess = [[StackMob stackmob] session];
     NSString *path = [[NSURL URLWithString:sess.apiURL] relativePath];    
-    if([request userBased])
-    {
-        [path stringByAppendingFormat:@"/%@",sess.userObjectName];
-    }
-    NSMutableDictionary *routes = [request.objectManager.router routes];
+    NSMutableDictionary *routes = [router routes];
     for( NSString *className in [routes allKeys] )
     {
         NSMutableDictionary *classRoutes = [routes objectForKey:className];
@@ -96,9 +102,9 @@
         {
             NSMutableDictionary *routeEntry = [classRoutes objectForKey:method];
             NSString *resourcePath = [routeEntry objectForKey:@"resourcePath"];
-            if(![path isEqualToString:resourcePath])  // prepend the base path if needed
+            NSString *newResourcePath = [path stringByAppendingString:resourcePath];
+            if(![newResourcePath isEqualToString:resourcePath])  // prepend the base path if needed
             {
-                NSString *newResourcePath = [path stringByAppendingString:resourcePath];
                 // update the resource path with the new value;
                 [routeEntry setObject:newResourcePath forKey:@"resourcePath"];
             }
@@ -147,6 +153,13 @@
 - (StackMobRequest *)userRequestForMethod:(NSString*)method withObject:(id)object withHttpVerb:(SMHttpVerb)httpVerb
 {
 	return [STMRestKitRequest userRequestForMethod:method withObject:object withHttpVerb:httpVerb];
+}
+
++ (StackMobRequest *)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb
+{
+
+    [NSException exceptionWithName:@"Not implemented" reason:@"Not implemented" userInfo:nil];
+	return nil;
 }
 
 /*

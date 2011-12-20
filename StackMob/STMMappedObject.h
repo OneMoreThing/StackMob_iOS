@@ -23,8 +23,14 @@
  */
 - (NSString *) schemaName;
 
+
+/** The name of the property that is the primary key */
+- (NSString *) primaryKeyPropertyName;
+
+@optional
+
 /** 
- *  All relationships must be defined via this class.
+ *  All relationship classes must be defined via this method.
  *  Returning nil will result in the relationship not being mapped.
  *  Example:
  *  For the propertyName "addresses", you would return a class

@@ -8,4 +8,6 @@
 
 @interface STMObjectRouter : RKObjectRouter
 
+- (Class) classByResourcePath:(NSString *)path forHttpVerb:(RKRequestMethod)method;
+
 @end

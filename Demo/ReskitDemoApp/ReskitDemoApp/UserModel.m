@@ -7,28 +7,45 @@
 //
 
 #import "UserModel.h"
+#import "GroupModel.h"
 
 @implementation UserModel
 
 @synthesize email;
 @synthesize name;
 @synthesize password;
-@synthesize lastmoddate;
-@synthesize createddate;
-@synthesize username;
-@synthesize roles;
+@synthesize lastModDate;
+@synthesize createDate;
+@synthesize userName;
+@synthesize groups;
 
 - (NSString *) schemaName
 {
     return @"user";
 }
 
+- (NSString *) primaryKeyPropertyName
+{
+    return @"userName";
+}
+
 - (BOOL) isEqual:(id)object
 {
     return ([email isEqualToString:[object email]] &&
             [name isEqualToString:[object name]] &&
-            [lastmoddate isEqual:[object lastmoddate]] &&
-            [username isEqualToString:[object username]]);
+            [lastModDate isEqual:[object lastModDate]] &&
+            [userName isEqualToString:[object userName]]);
+}
+
+
+- (Class) classForRelationshipPropertyName:(NSString *)propertyName
+{
+    if([propertyName isEqualToString:@"groups"])
+    {
+        return [GroupModel class];
+    }
+    
+    return nil;
 }
 
 @end

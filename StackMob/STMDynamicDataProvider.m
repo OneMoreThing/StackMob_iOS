@@ -12,6 +12,11 @@
 
 @implementation STMDynamicDataProvider
 
+- (void) prepare
+{
+    
+}
+
 - (StackMobRequest *)request
 {
     return [StackMobRequest request];
@@ -35,6 +40,11 @@
 - (StackMobRequest *)requestForMethod:(NSString*)method withObject:(id)object  withHttpVerb:(SMHttpVerb)httpVerb
 {
 	return [StackMobRequest requestForMethod:method withObject:object withHttpVerb:httpVerb];
+}
+
++ (StackMobRequest *)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb;
+{
+    return [StackMobRequest requestForMethod:method withArguments:arguments withHttpVerb:httpVerb];
 }
 
 - (StackMobRequest *)requestForMethod:(NSString *)method withData:(NSData *)data{

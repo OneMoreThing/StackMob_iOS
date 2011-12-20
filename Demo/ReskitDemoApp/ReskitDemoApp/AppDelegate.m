@@ -46,6 +46,8 @@
               userObjectName:STACKMOB_USER_OBJECT_NAME
             apiVersionNumber:[NSNumber numberWithInt:STACKMOB_API_VERSION]
                 dataProvider:dataProvider];
+    
+    [[[StackMob stackmob] dataProvider] prepare];
     return YES;
 }
 

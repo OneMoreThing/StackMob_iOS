@@ -43,30 +43,21 @@
 - (void) registerObjectMapping:(STMObjectMapping *)objectMapping
 {
     objectMapping.rootKeyPath = @"";
-    
-    RKObjectMapping *errorMapping = [RKObjectMapping mappingForClass:[STMResponseError class] block:^(RKObjectMapping *m){
-        [m mapAttributes:@"error",nil]; 
-    }];
-    
+
     id<STMMappedObject> obj = [[[objectMapping.objectClass alloc] init] autorelease];
     
     // Register all verbs 
+   /* NSString *resourcePath = [NSString stringWithFormat:@"/%@",[obj schemaName]];
+    [router routeClass:objectMapping.objectClass toResourcePath:resourcePath forMethod:RKRequestMethodPOST];*/
+    NSString *resourcePath2 = [NSString stringWithFormat:@"/%@/:%@",[obj schemaName], [obj primaryKeyPropertyName]];
+    [router routeClass:objectMapping.objectClass toResourcePath:resourcePath2];
+    
     NSString *resourcePath = [NSString stringWithFormat:@"/%@",[obj schemaName]];
-    [router routeClass:objectMapping.objectClass toResourcePath:resourcePath];
-    
-    // Setup a dynamic mapping to handle error messages
-    RKDynamicObjectMapping* dynamicMapping = [RKDynamicObjectMapping dynamicMapping];
-    
-    dynamicMapping.objectMappingForDataBlock = ^ RKObjectMapping* (id mappableData) {
-        if ([[mappableData valueForKey:@"error"] isEqualToString:nil]) {
-            return objectMapping;
-        } else {
-            return errorMapping;
-        }
-    };
+    [router routeClass:objectMapping.objectClass toResourcePath:resourcePath forMethod:RKRequestMethodPOST];
+    [router routeClass:objectMapping.objectClass toResourcePath:resourcePath forMethod:RKRequestMethodGET];
     
     // No "wrapped" namesapce objects i.e. NOT { "user" : { "username" : "john", "password", "pass123" } }
-    [internalProvider setMapping:dynamicMapping forKeyPath:@""];
+    [internalProvider setMapping:objectMapping forKeyPath:@""];
     RKObjectMapping *inverseMapping = [objectMapping inverseMapping];
     [internalProvider setSerializationMapping:inverseMapping forClass:objectMapping.objectClass];
 }

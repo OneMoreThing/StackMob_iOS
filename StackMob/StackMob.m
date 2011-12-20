@@ -424,7 +424,7 @@ static SMEnvironment environment;
 - (StackMobRequest *)get:(NSString *)path withCallback:(StackMobCallback)callback
 {
     StackMobRequest *request = [self.dataProvider requestForMethod:path
-                                                        withObject:NULL
+                                                        withObject:nil
                                                       withHttpVerb:GET];
     [self queueRequest:request andCallback:callback];
     return request;
@@ -490,10 +490,16 @@ static SMEnvironment environment;
     return [self post:fullPath withBulkArguments:arguments andCallback:callback];
 }
 
+- (StackMobRequest *)put:(NSString *)path withObject:(id)object andCallback:(StackMobCallback)callback {
+    StackMobRequest *request = [self.dataProvider requestForMethod:path withObject:object withHttpVerb:PUT];
+    [self queueRequest:request andCallback:callback];
+    return request;
+}
+
 - (StackMobRequest *)put:(NSString *)path withId:(NSString *)objectId andArguments:(NSDictionary *)arguments andCallback:(StackMobCallback)callback {
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@", path, objectId];
 
-    StackMobRequest *request = [StackMobRequest requestForMethod:fullPath withArguments:arguments withHttpVerb:PUT];
+    StackMobRequest *request = [self.dataProvider requestForMethod:fullPath withArguments:arguments withHttpVerb:PUT];
     [self queueRequest:request andCallback:callback];
     return request;
 }
@@ -518,6 +524,11 @@ static SMEnvironment environment;
 
 - (StackMobRequest *)destroy:(NSString *)path withArguments:(NSDictionary *)arguments andCallback:(StackMobCallback)callback{
     return [self destroy:path withObject:arguments andHeaders:[NSDictionary dictionary]  andCallback:callback];
+}
+
+- (StackMobRequest *)destroy:(NSString *)path withObject:(id)object andCallback:(StackMobCallback)callback
+{
+    return [self destroy:path withObject:object andHeaders:[NSDictionary dictionary]  andCallback:callback];
 }
 
 - (StackMobRequest *)destroy:(NSString *)path withObject:(id)object andHeaders:(NSDictionary *)headers andCallback:(StackMobCallback)callback

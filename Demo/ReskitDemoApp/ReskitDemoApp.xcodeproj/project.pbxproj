@@ -22,6 +22,7 @@
 		C638678E149AD8D9003A11B1 /* libStackMobiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B7AF1462721D0007E83E /* libStackMobiOS.a */; };
 		C6386794149AD988003A11B1 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6386793149AD988003A11B1 /* libxml2.dylib */; };
 		C63867CB149C3109003A11B1 /* RoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C63867CA149C3109003A11B1 /* RoleModel.m */; };
+		C63867CE149C397A003A11B1 /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C63867CD149C3979003A11B1 /* GroupModel.m */; };
 		C648B739146270580007E83E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B738146270580007E83E /* UIKit.framework */; };
 		C648B73B146270580007E83E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B73A146270580007E83E /* Foundation.framework */; };
 		C648B73D146270580007E83E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B73C146270580007E83E /* CoreGraphics.framework */; };
@@ -40,6 +41,8 @@
 		C648B764146270580007E83E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C648B73A146270580007E83E /* Foundation.framework */; };
 		C648B76C146270580007E83E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C648B76A146270580007E83E /* InfoPlist.strings */; };
 		C648B76F146270580007E83E /* ReskitDemoAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C648B76E146270580007E83E /* ReskitDemoAppTests.m */; };
+		C690B7AC14A02AFB0057FAE5 /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = C690B7AA14A02AFB0057FAE5 /* groups.png */; };
+		C690B7AD14A02AFB0057FAE5 /* groups@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C690B7AB14A02AFB0057FAE5 /* groups@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,8 @@
 		C6386793149AD988003A11B1 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		C63867C9149C3109003A11B1 /* RoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleModel.h; sourceTree = "<group>"; };
 		C63867CA149C3109003A11B1 /* RoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleModel.m; sourceTree = "<group>"; };
+		C63867CC149C3979003A11B1 /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
+		C63867CD149C3979003A11B1 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
 		C648B734146270580007E83E /* ReskitDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReskitDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C648B738146270580007E83E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C648B73A146270580007E83E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +123,8 @@
 		C648B76D146270580007E83E /* ReskitDemoAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReskitDemoAppTests.h; sourceTree = "<group>"; };
 		C648B76E146270580007E83E /* ReskitDemoAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReskitDemoAppTests.m; sourceTree = "<group>"; };
 		C648B79F1462721D0007E83E /* StackMobiOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StackMobiOS.xcodeproj; path = ../../StackMobiOS.xcodeproj; sourceTree = "<group>"; };
+		C690B7AA14A02AFB0057FAE5 /* groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = groups.png; sourceTree = "<group>"; };
+		C690B7AB14A02AFB0057FAE5 /* groups@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "groups@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +176,8 @@
 		C638675B149AB74F003A11B1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C63867CC149C3979003A11B1 /* GroupModel.h */,
+				C63867CD149C3979003A11B1 /* GroupModel.m */,
 				C6386754149AB3FC003A11B1 /* UserModel.h */,
 				C6386755149AB3FC003A11B1 /* UserModel.m */,
 				C63867C9149C3109003A11B1 /* RoleModel.h */,
@@ -180,6 +189,8 @@
 		C638675C149AB76A003A11B1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C690B7AA14A02AFB0057FAE5 /* groups.png */,
+				C690B7AB14A02AFB0057FAE5 /* groups@2x.png */,
 				C638675D149AB9F7003A11B1 /* briefcase.png */,
 				C638675E149AB9F7003A11B1 /* briefcase@2x.png */,
 				C638675F149AB9F7003A11B1 /* man.png */,
@@ -386,6 +397,8 @@
 				C6386762149AB9F7003A11B1 /* briefcase@2x.png in Resources */,
 				C6386763149AB9F7003A11B1 /* man.png in Resources */,
 				C6386764149AB9F7003A11B1 /* man@2x.png in Resources */,
+				C690B7AC14A02AFB0057FAE5 /* groups.png in Resources */,
+				C690B7AD14A02AFB0057FAE5 /* groups@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +441,7 @@
 				C6386776149AC7F2003A11B1 /* CompanyDetailsViewController.m in Sources */,
 				C638678D149AD0FD003A11B1 /* UserDetailsViewController.m in Sources */,
 				C63867CB149C3109003A11B1 /* RoleModel.m in Sources */,
+				C63867CE149C397A003A11B1 /* GroupModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

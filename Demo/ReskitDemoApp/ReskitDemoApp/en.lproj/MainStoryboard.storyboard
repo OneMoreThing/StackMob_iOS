@@ -32,6 +32,36 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserCell" textLabel="uK6-SM-Epr" detailTextLabel="MJe-Ec-yAQ" style="IBUITableViewCellStyleSubtitle" id="LI3-Xw-DlQ">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uK6-SM-Epr">
+                                                    <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MJe-Ec-yAQ">
+                                                    <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="fiv-4y-mdN" kind="push" identifier="EditUser" id="POZ-zG-U6f"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="2" id="Iku-JE-6yV"/>
                                     <outlet property="delegate" destination="2" id="4B3-Ut-C03"/>
@@ -40,14 +70,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Users" image="first" id="7"/>
-                    <navigationItem key="navigationItem" id="cCj-wl-kV3">
+                    <tabBarItem key="tabBarItem" title="Users" image="man.png" id="7"/>
+                    <navigationItem key="navigationItem" title="Users" id="cCj-wl-kV3">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="rSl-YW-T8z">
+                            <connections>
+                                <action selector="refreshUserList:" destination="2" id="J65-Q7-amA"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="j3Y-VH-EqJ">
                             <connections>
                                 <segue destination="jVk-Ot-ag8" kind="modal" identifier="AddUser" id="Qbi-LO-GTR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="rSl-YW-T8z" id="x0L-jb-LCf"/>
+                        <outlet property="tableView" destination="J2g-8B-Mpq" id="F9D-JX-9wl"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1115" y="-115"/>
@@ -68,8 +107,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Companies" image="second" id="6"/>
-                    <navigationItem key="navigationItem" id="gpX-gz-3gQ">
+                    <tabBarItem key="tabBarItem" title="Groups" image="groups.png" id="6"/>
+                    <navigationItem key="navigationItem" title="Groups" id="gpX-gz-3gQ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="Pbs-HS-KtD"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eUY-Po-GDA">
                             <connections>
                                 <segue destination="viW-nc-WDB" kind="push" id="f1x-FF-C7w"/>
@@ -88,23 +128,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="osK-Pq-wqw">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="viW-nc-WDB" id="fcN-IP-Ntl"/>
                             <outlet property="delegate" destination="viW-nc-WDB" id="gmr-Qv-0X7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bJJ-qL-xra"/>
+                    <navigationItem key="navigationItem" title="Add Group" id="bJJ-qL-xra"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1511" y="509"/>
@@ -131,7 +160,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqT-HF-GnV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="QGW-so-gjZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Companies" image="briefcase.png" id="D4a-ju-fGR"/>
+                    <tabBarItem key="tabBarItem" title="Groups" image="groups.png" id="D4a-ju-fGR"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="h0k-ny-vsq">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -147,7 +176,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFJ-PA-aEo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="fiv-4y-mdN" customClass="UserDetailsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="yk2-NI-LA8">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -297,17 +326,19 @@
                     <connections>
                         <outlet property="emailTextField" destination="KeW-da-19U" id="YKg-k5-t5f"/>
                         <outlet property="nameTextField" destination="oAg-Yg-j6p" id="gte-R4-l3B"/>
+                        <outlet property="password2TextField" destination="dOh-7C-ACu" id="Dmv-yd-6Op"/>
                         <outlet property="passwordTextField" destination="fxc-OT-xP2" id="jLq-q1-Red"/>
                         <outlet property="userNameTextField" destination="UCZ-ck-XsY" id="iah-sb-cV8"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2086" y="-703"/>
+            <point key="canvasLocation" x="2062" y="-140"/>
         </scene>
         <scene sceneID="hvj-QR-lTc">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXP-q3-iWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="jVk-Ot-ag8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="md4-Rb-mpU"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0nX-LZ-XLX">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -320,10 +351,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="briefcase.png" width="26" height="26"/>
-        <image name="first" width="16" height="16"/>
+        <image name="groups.png" width="26" height="26"/>
         <image name="man.png" width="26" height="26"/>
-        <image name="second" width="16" height="16"/>
     </resources>
     <classes>
         <class className="CompanyDetailsViewController" superclassName="UITableViewController">
@@ -340,13 +369,23 @@
                 <relationship kind="outlet" name="delegate"/>
                 <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="password2TextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="roleTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="user" candidateClass="UserModel"/>
                 <relationship kind="outlet" name="userNameTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
+        <class className="UserModel" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserModel.h"/>
+        </class>
         <class className="UserViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshUserList:"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -354,4 +393,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="POZ-zG-U6f"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -347,6 +347,9 @@ typedef void (^StackMobCallback)(BOOL success, id result);
             andArguments:(NSArray *)args 
              andCallback:(StackMobCallback)callback;
 
+
+- (StackMobRequest *)put:(NSString *)path withObject:(id)object andCallback:(StackMobCallback)callback;
+
 /* 
  * DELETE the object at the given path. 
  * @path the name of the object in your stackmob app
@@ -360,8 +363,16 @@ typedef void (^StackMobCallback)(BOOL success, id result);
  * DELETE the object at the given path. 
  * @path the name of the object in your stackmob app
  * @param object the obj to be deleted. A set primary key is required.
+ * @param headers additional headers to be passed along with request
  */
 - (StackMobRequest *)destroy:(NSString *)path withObject:(id)object andHeaders:(NSDictionary *)headers andCallback:(StackMobCallback)callback;
+
+/* 
+ * DELETE the object at the given path. 
+ * @path the name of the object in your stackmob app
+ * @param object the obj to be deleted. A set primary key is required.
+ */
+- (StackMobRequest *)destroy:(NSString *)path withObject:(id)object andCallback:(StackMobCallback)callback;
 
 /*
  * automically remove elements from an array or has many relationship

@@ -50,41 +50,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
-         filePath = "/Users/ryanconnelly/Documents/opensource/StackMob_iOS_master/StackMob_iOS/StackMob/External/libraries/RestKit/Code/ObjectMapping/RKObjectRouter.m"
-         timestampString = "345778534.409062"
+         filePath = "/Users/ryanconnelly/Documents/opensource/StackMob_iOS_master/StackMob_iOS/StackMob/External/libraries/RestKit/Code/ObjectMapping/RKObjectMappingProvider.m"
+         timestampString = "346045204.004072"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "-routeClass:toResourcePath:forMethodName:escapeRoutedPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/ryanconnelly/Documents/opensource/StackMob_iOS_master/StackMob_iOS/StackMob/STMObjectMappingProvider.m"
-         timestampString = "345778607.069218"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
-         landmarkName = "-registerObjectMappings:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/ryanconnelly/Documents/opensource/StackMob_iOS_master/StackMob_iOS/StackMob/STMObjectMapping.m"
-         timestampString = "345780377.959262"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
-         landmarkName = "+defaultMappingsForClasses:"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-objectMappingForKeyPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -12,5 +12,17 @@
 @synthesize name;
 @synthesize lastModDate;
 @synthesize createDate;
+@synthesize roleId;
+
+- (NSString *) schemaName
+{
+    return @"role";
+}
+
+/** The name of the property that is the primary key */
+- (NSString *) primaryKeyPropertyName
+{
+    return @"roleId";
+}
 
 @end

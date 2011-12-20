@@ -25,7 +25,7 @@
 - (StackMobRequest *)requestForMethod:(NSString*)method;
 - (StackMobRequest *)requestForMethod:(NSString*)method withHttpVerb:(SMHttpVerb) httpVerb;
 - (StackMobRequest *)requestForMethod:(NSString*)method withObject:(id)object withHttpVerb:(SMHttpVerb) httpVerb;
-
++ (StackMobRequest *)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb;
 /* 
  * User based requests 
  * Use these to 
@@ -47,5 +47,8 @@
  */
 - (StackMobPushRequest *)pushRequestWithArguments:(NSDictionary *)arguments withHttpVerb:(SMHttpVerb) httpVerb;
 - (StackMobPushRequest *)pushRequest;
+
+/* Called after session has been started*/
+- (void) prepare;
 
 @end
