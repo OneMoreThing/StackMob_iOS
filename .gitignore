@@ -22,6 +22,6 @@ configuration/*
 Demo/ReskitDemoApp/ReskitDemoApp/configuration/*
 
 # XCode user local
-StackMobiOS.xcodeproj/xcuserdata/**/*
+StackMobiOS.xcodeproj/*xcuserdata/**/*
 StackMobiOS.xcodeproj/project.xcworkspace/**/*
 StackMobiOS.xcodeproj/project.xcworkspace/*
