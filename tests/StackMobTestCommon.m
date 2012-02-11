@@ -18,7 +18,7 @@
 @implementation StackMobTestCommon
 
 - (void)setUp {
-    [StackMob setApplication:kAPIKey secret:kAPISecret appName:kAppName subDomain:kSubDomain userObjectName:@"user" apiVersionNumber:[NSNumber numberWithInt:kVersion]];
+    [StackMob setApplication:kAPIKey secret:kAPISecret appName:kAppName userObjectName:@"user" apiVersionNumber:[NSNumber numberWithInt:kVersion]];
     emptyCallback = ^(BOOL success, id result) {};
 }
 

@@ -276,6 +276,7 @@
 	[request addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	[request addValue:@"deflate" forHTTPHeaderField:@"Accept-Encoding"];
     [request addValue:[session userAgentString] forHTTPHeaderField:@"User-Agent"];
+    [request addValue:[[session apiVersionNumber] stringValue] forHTTPHeaderField:@"version"];
     for(NSString *header in mHeaders) {
         if (!([header isEqualToString:@"Accept-Encoding"] || [header isEqualToString:@"User-Agent"] || [header isEqualToString:@"Content-Type"])) {
             [request addValue:(NSString *)[mHeaders objectForKey:header] forHTTPHeaderField:header];

@@ -16,7 +16,6 @@
 
 NSString * const kAPIKey = @"API_KEY";
 NSString * const kAPISecret = @"API_SECRET";
-NSString * const kSubDomain = @"SUB_DOMAIN";
 NSString * const kAppName = @"APP_NAME";
 NSInteger  const kVersion = 0;
 
