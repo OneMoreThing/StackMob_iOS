@@ -59,9 +59,9 @@ static StackMob *_sharedManager = nil;
 static SMEnvironment environment;
 
 
-+ (StackMob *)setApplication:(NSString *)apiKey secret:(NSString *)apiSecret userObjectName:(NSString *)userObjectName apiVersionNumber:(NSNumber *)apiVersion
++ (StackMob *)setApplication:(NSString *)apiKey secret:(NSString *)apiSecret appName:appName userObjectName:(NSString *)userObjectName apiVersionNumber:(NSNumber *)apiVersion
 {
-    return [self setApplication:apiKey secret:apiSecret appName:nil subDomain:nil userObjectName:userObjectName apiVersionNumber:apiVersion];
+    return [self setApplication:apiKey secret:apiSecret appName:appName subDomain:nil userObjectName:userObjectName apiVersionNumber:apiVersion];
 }
 
 + (StackMob *)setApplication:(NSString *)apiKey secret:(NSString *)apiSecret appName:(NSString *)appName subDomain:(NSString *)subDomain userObjectName:(NSString *)userObjectName apiVersionNumber:(NSNumber *)apiVersion
