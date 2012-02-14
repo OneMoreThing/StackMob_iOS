@@ -172,7 +172,7 @@ StackMobSession *mySession = nil;
 - (void) testURLGeneration {
 
 	StackMobRequest *request = [StackMobRequest requestForMethod: @"user"];
-	NSURL *testURL = [NSURL URLWithString: @"http://stackmob.stackmob.com/api/0/iossdktest/user"];
+	NSURL *testURL = [NSURL URLWithString: @"http://api.mob1.stackmob.com/user"];
     NSLog(@"expected %@", [testURL absoluteString]),
     NSLog(@"actual %@", [request.url absoluteString]);
 	STAssertTrue([[testURL absoluteString] isEqualToString: 
@@ -185,7 +185,7 @@ StackMobSession *mySession = nil;
 - (void) testSecureURLGeneration {
     StackMobRequest *request = [StackMobRequest requestForMethod:@"user"];
     request.isSecure = YES;
-    NSURL *expectedURL = [NSURL URLWithString:@"https://stackmob.stackmob.com/api/0/iossdktest/user"];
+    NSURL *expectedURL = [NSURL URLWithString:@"https://api.mob1.stackmob.com/user"];
     STAssertTrue([[expectedURL absoluteString] isEqualToString:[request.url absoluteString]], @"%@ Does Not Match Expected Secure URL", [request.url absoluteString]);
     expectedURL = nil;
     request = nil;

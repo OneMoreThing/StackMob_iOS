@@ -16,7 +16,7 @@
 #import "StackMobConfiguration.h"
 #import "StackMobVersion.h"
 
-static NSString *const SMDefaultDomain = @"stackmob.com";
+static NSString *const SMDefaultDomain = @"api.mob1.stackmob.com";
 
 @interface StackMobSession : NSObject {
     NSString *url;
