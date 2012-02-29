@@ -197,8 +197,8 @@ static StackMobSession* sharedSession = nil;
     _lastRequestTime = nil;
     _requestBurstCount = 0;
     _requestTimer = nil; 
-    url = _domain;
-    pushURL = [[NSString stringWithFormat:@"http://%@/push",_domain] retain];
+    url = [[NSString stringWithFormat:@"api.%@",_domain] retain];
+    pushURL = [[NSString stringWithFormat:@"http://push.%@",_domain] retain];
     secureURL = [[NSString stringWithFormat:@"https://%@", url] retain];
     regularURL = [[NSString stringWithFormat:@"http://%@", url] retain];
 }
