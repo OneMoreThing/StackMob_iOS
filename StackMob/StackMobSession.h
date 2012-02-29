@@ -153,7 +153,6 @@ static NSString *const SMDefaultDomain = @"mob1.stackmob.com";
  * @param secret the application secret api key
  * @param appName the application name
  * @param subDomain the application subDomain
- * @deprecated
  *
  */
 + (StackMobSession*)sessionForApplication:(NSString*)key secret:(NSString*)secret
@@ -168,7 +167,6 @@ static NSString *const SMDefaultDomain = @"mob1.stackmob.com";
  * @param appName the application name
  * @param subDomain the application subDomain
  * @param domain overwrites the stackmob.com domain
- * @deprecated
  *
  */
 + (StackMobSession*)sessionForApplication:(NSString*)key secret:(NSString*)secret
@@ -197,7 +195,6 @@ static NSString *const SMDefaultDomain = @"mob1.stackmob.com";
  * @param subDomain the application subDomain
  * @param domain overwrites the stackmob.com domain
  * @param userObjectName the name of the user object in your StackMob App
- * @deprecated
  */
 + (StackMobSession*)sessionForApplication:(NSString*)key 
                                    secret:(NSString*)secret 
