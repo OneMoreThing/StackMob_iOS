@@ -18,6 +18,7 @@
 #include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/if_dl.h>
+#include "OpenUDID.h"
 
 NSString *bundleVersion = @"";
 NSString *identifier = @"";
@@ -45,7 +46,7 @@ static StackMobClientData * _sharedInstance=nil;
 	if((self = [super init])) {
 		// Device info.
 		UIDevice *device = [UIDevice currentDevice];
-		identifier = [[device uniqueIdentifier] retain];
+		identifier = [OpenUDID value];
 		model = [[device model] retain];
 		systemVersion = [[device systemVersion] retain];
 		

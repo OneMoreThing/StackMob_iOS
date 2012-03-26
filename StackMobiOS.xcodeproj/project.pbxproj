@@ -92,8 +92,11 @@
 		038CB2A514285007001DEAC9 /* StackMobAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 038CB1D214283272001DEAC9 /* StackMobAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		564A6DE614F6BF6700DA1AE7 /* StackMobCookieStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 564A6DE414F6BF6700DA1AE7 /* StackMobCookieStore.h */; };
 		564A6DE714F6BF6700DA1AE7 /* StackMobCookieStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		564E2B651520F48D00B5893E /* OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = 564E2B621520F48D00B5893E /* OpenUDID.h */; };
+		564E2B661520F48D00B5893E /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E2B631520F48D00B5893E /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		564EE37014F6D67F00D76EC1 /* StackMobCookieStore.h in Sources */ = {isa = PBXBuildFile; fileRef = 564A6DE414F6BF6700DA1AE7 /* StackMobCookieStore.h */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		564EE37214F6D68300D76EC1 /* StackMobCookieStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5683F2F21520FE2C0062633B /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E2B631520F48D00B5893E /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		569A3C4C1517BB9F00DEDABD /* InneractiveAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 569A3C491517BB9F00DEDABD /* InneractiveAd.h */; };
 		569A3C4D1517BB9F00DEDABD /* InneractiveAdSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 569A3C4B1517BB9F00DEDABD /* InneractiveAdSDK.a */; };
 		57121D5E140FDE3F00686005 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57121D5D140FDE3F00686005 /* libz.dylib */; };
@@ -187,6 +190,8 @@
 		038CB28E14284C3F001DEAC9 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		564A6DE414F6BF6700DA1AE7 /* StackMobCookieStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMobCookieStore.h; sourceTree = "<group>"; };
 		564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackMobCookieStore.m; sourceTree = "<group>"; };
+		564E2B621520F48D00B5893E /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		564E2B631520F48D00B5893E /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		569A3C491517BB9F00DEDABD /* InneractiveAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InneractiveAd.h; sourceTree = "<group>"; };
 		569A3C4B1517BB9F00DEDABD /* InneractiveAdSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = InneractiveAdSDK.a; sourceTree = "<group>"; };
 		57121D5D140FDE3F00686005 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -300,6 +305,7 @@
 				569A3C471517BB9F00DEDABD /* inneractive */,
 				038CB1AC14283272001DEAC9 /* libraries */,
 				038CB1AE14283272001DEAC9 /* OAuthConsumer */,
+				564E2B611520F48D00B5893E /* OpenUDID */,
 				038CB1CC14283272001DEAC9 /* reachability */,
 			);
 			path = External;
@@ -420,6 +426,15 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		564E2B611520F48D00B5893E /* OpenUDID */ = {
+			isa = PBXGroup;
+			children = (
+				564E2B621520F48D00B5893E /* OpenUDID.h */,
+				564E2B631520F48D00B5893E /* OpenUDID.m */,
+			);
+			path = OpenUDID;
+			sourceTree = "<group>";
+		};
 		569A3C471517BB9F00DEDABD /* inneractive */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +526,7 @@
 				C63FB3561497EDF4007961C1 /* SMFileTest.h in Headers */,
 				564A6DE614F6BF6700DA1AE7 /* StackMobCookieStore.h in Headers */,
 				569A3C4C1517BB9F00DEDABD /* InneractiveAd.h in Headers */,
+				564E2B651520F48D00B5893E /* OpenUDID.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5683F2F21520FE2C0062633B /* OpenUDID.m in Sources */,
 				93DE001114CFAC7B00764514 /* NSData+Base64.h in Sources */,
 				93DE001214CFAC7B00764514 /* NSData+Base64.m in Sources */,
 				93DE001314CFAC7B00764514 /* NSData+JSON.h in Sources */,
@@ -698,6 +715,7 @@
 				E3C7523A1486FBA3007CFEF1 /* SMGeoPoint.m in Sources */,
 				C63FB3521497EA4E007961C1 /* SMFile.m in Sources */,
 				564A6DE714F6BF6700DA1AE7 /* StackMobCookieStore.m in Sources */,
+				564E2B661520F48D00B5893E /* OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
