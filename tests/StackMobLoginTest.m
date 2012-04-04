@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import <UIKit/UIKit.h>
-#import "NSData+Base64.h"
+#import "../StackMob/External/RestKit/Vendor/cocoa-oauth/NSData+Base64.h"
 #import "StackMobLoginTest.h"
 
 #define USER_NAME @"USER_NAME_HERE"

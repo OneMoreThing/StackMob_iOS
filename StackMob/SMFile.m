@@ -7,7 +7,7 @@
 //
 
 #import "SMFile.h"
-#import "NSData+Base64.h"
+#import "External/RestKit/Vendor/cocoa-oauth/NSData+Base64.h"
 
 @implementation SMFile
 @synthesize data;

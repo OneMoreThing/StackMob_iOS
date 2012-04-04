@@ -19,7 +19,7 @@
 #import "StackMob.h"
 #import "StackMobTestUtils.h"
 #import "StackMobTestCommon.h"
-#import "NSData+Base64.h"
+#import "../StackMob/External/RestKit/Vendor/cocoa-oauth/NSData+Base64.h"
 #import "SMFileTest.h"
 #import "SMFile.h"
 
