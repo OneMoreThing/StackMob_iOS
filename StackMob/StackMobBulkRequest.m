@@ -7,7 +7,7 @@
 //
 
 #import "StackMobBulkRequest.h"
-#import "JSONKit.h"
+#import "External/RestKit/Vendor/JSONKit/JSONKit.h"
 #import "NSData+JSON.h"
 
 @implementation StackMobBulkRequest

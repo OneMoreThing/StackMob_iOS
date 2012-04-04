@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import "StackMobConfiguration.h"
-#import "JSONKit.h"
+#import "External/RestKit/Vendor/JSONKit/JSONKit.h"
 
 #define DEVICE_TAG_NAME						@"u"			
 #define DEVICE_NAME							@"dn"	

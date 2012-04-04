@@ -15,7 +15,7 @@
 #import "StackMobSession.h"
 #import "StackMobConfiguration.h"
 #import "StackMobQuery.h"
-#import "JSONKit.h"
+#import "External/RestKit/Vendor/JSONKit/JSONKit.h"
 
 @class StackMob;
 
