@@ -92,6 +92,9 @@
 		564A6DE714F6BF6700DA1AE7 /* StackMobCookieStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		564EE37014F6D67F00D76EC1 /* StackMobCookieStore.h in Sources */ = {isa = PBXBuildFile; fileRef = 564A6DE414F6BF6700DA1AE7 /* StackMobCookieStore.h */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		564EE37214F6D68300D76EC1 /* StackMobCookieStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		56C81B02152C29AB00422A44 /* StackMobModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C81B00152C29AB00422A44 /* StackMobModel.h */; };
+		56C81B03152C29AB00422A44 /* StackMobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C81B01152C29AB00422A44 /* StackMobModel.m */; };
+		56C81B06152CF54F00422A44 /* StackMobModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C81B05152CF54F00422A44 /* StackMobModelTests.m */; };
 		56F6BA1C152C1D6F0007F47A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CE43251288EF9100A73E9C /* CFNetwork.framework */; };
 		56F6BA1E152C1D780007F47A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F6BA1D152C1D780007F47A /* CoreData.framework */; };
 		56F6BA20152C1D810007F47A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F6BA1F152C1D810007F47A /* Security.framework */; };
@@ -237,6 +240,10 @@
 		560BB27F152243DA004BB615 /* SecureUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureUDID.m; sourceTree = "<group>"; };
 		564A6DE414F6BF6700DA1AE7 /* StackMobCookieStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMobCookieStore.h; sourceTree = "<group>"; };
 		564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackMobCookieStore.m; sourceTree = "<group>"; };
+		56C81B00152C29AB00422A44 /* StackMobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMobModel.h; sourceTree = "<group>"; };
+		56C81B01152C29AB00422A44 /* StackMobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackMobModel.m; sourceTree = "<group>"; };
+		56C81B04152CF54F00422A44 /* StackMobModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackMobModelTests.h; path = tests/StackMobModelTests.h; sourceTree = "<group>"; };
+		56C81B05152CF54F00422A44 /* StackMobModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobModelTests.m; path = tests/StackMobModelTests.m; sourceTree = "<group>"; };
 		56F6BA06152C1BC70007F47A /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		56F6BA1D152C1D780007F47A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		56F6BA1F152C1D810007F47A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -342,6 +349,8 @@
 				564A6DE514F6BF6700DA1AE7 /* StackMobCookieStore.m */,
 				038CB1D614283272001DEAC9 /* StackMobHerokuRequest.h */,
 				038CB1D714283272001DEAC9 /* StackMobHerokuRequest.m */,
+				56C81B00152C29AB00422A44 /* StackMobModel.h */,
+				56C81B01152C29AB00422A44 /* StackMobModel.m */,
 				038CB1D814283272001DEAC9 /* StackMobPushRequest.h */,
 				038CB1D914283272001DEAC9 /* StackMobPushRequest.m */,
 				038CB1DA14283272001DEAC9 /* StackMobRequest.h */,
@@ -496,6 +505,8 @@
 				82CE45F212892FFA00A73E9C /* APIRequestTests.m */,
 				C6A831E114981267001FB62F /* StackMobLoginTest.h */,
 				C6A831E214981267001FB62F /* StackMobLoginTest.m */,
+				56C81B04152CF54F00422A44 /* StackMobModelTests.h */,
+				56C81B05152CF54F00422A44 /* StackMobModelTests.m */,
 				9369485E147228B400575176 /* StackMobPushTests.h */,
 				9369485F147228B400575176 /* StackMobPushTests.m */,
 				E3C7523C14871A18007CFEF1 /* StackMobQueryTests.h */,
@@ -553,6 +564,7 @@
 				C63FB3561497EDF4007961C1 /* SMFileTest.h in Headers */,
 				564A6DE614F6BF6700DA1AE7 /* StackMobCookieStore.h in Headers */,
 				560BB280152243DA004BB615 /* SecureUDID.h in Headers */,
+				56C81B02152C29AB00422A44 /* StackMobModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +754,7 @@
 				C63FB3591497F22A007961C1 /* SMFile.m in Sources */,
 				C6A831E314981267001FB62F /* StackMobLoginTest.m in Sources */,
 				560BB28315224413004BB615 /* SecureUDID.m in Sources */,
+				56C81B06152CF54F00422A44 /* StackMobModelTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +790,7 @@
 				C63FB3521497EA4E007961C1 /* SMFile.m in Sources */,
 				564A6DE714F6BF6700DA1AE7 /* StackMobCookieStore.m in Sources */,
 				560BB281152243DA004BB615 /* SecureUDID.m in Sources */,
+				56C81B03152C29AB00422A44 /* StackMobModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

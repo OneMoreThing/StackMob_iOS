@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "StackMob.h"
+#import <runtime.h>
 
 @interface StackMobModel : NSObject
+
+@property (nonatomic, retain) NSString *identifier;
 
 - (void)initWithActualClass:(Class)actualClass;
 
 - (void)save;
+
+- (void)saveWithCallback:(StackMobCallback)callback;
 
 - (void)fetch;
 
