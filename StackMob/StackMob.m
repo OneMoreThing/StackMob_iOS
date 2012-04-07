@@ -26,6 +26,7 @@
 @property (nonatomic, retain) StackMobRequest *currentRequest;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, retain) NSLock *queueLock;
+@property (nonatomic, retain) RKClient *client;
 
 - (void)queueRequest:(StackMobRequest *)request andCallback:(StackMobCallback)callback;
 - (void)run;
@@ -52,6 +53,7 @@ struct {
 @synthesize currentRequest = _currentRequest;
 @synthesize running = _running;
 @synthesize queueLock = _queueLock;
+@synthesize client = _client;
 
 @synthesize sessionDelegate = _sessionDelegate;
 
@@ -80,43 +82,12 @@ static SMEnvironment environment;
 
 + (StackMob *)stackmob {
     if (_sharedManager == nil) {
-        environment = SMEnvironmentProduction;
-        
         _sharedManager = [[super allocWithZone:NULL] init];
-        NSDictionary *appInfo = [_sharedManager loadInfo];
-        if(appInfo){
-            NSLog(@"Loading applicatino info from StackMob.plist is being deprecated for security purposes.");
-            NSLog(@"Please define your application info in your app's prefix.pch");
-            _sharedManager.session = [StackMobSession sessionForApplication:[appInfo objectForKey:@"publicKey"]
-                                                                     secret:[appInfo objectForKey:@"privateKey"]
-                                                                    appName:[appInfo objectForKey:@"appName"]
-                                                                  subDomain:[appInfo objectForKey:@"appSubdomain"]
-                                                                     domain:[appInfo objectForKey:@"domain"]
-                                                             userObjectName:[appInfo objectForKey:@"userObjectName"]
-                                                           apiVersionNumber:[appInfo objectForKey:@"apiVersion"]];
-            
-        }
-        else{
-#ifdef STACKMOB_PUBLIC_KEY
-            _sharedManager.session = [StackMobSession sessionForApplication:STACKMOB_PUBLIC_KEY
-                                                                     secret:STACKMOB_PRIVATE_KEY
-                                                                    appName:STACKMOB_APP_NAME
-#ifdef STACKMOB_APP_MOB
-                                                                  subDomain:STACKMOB_APP_MOB
-#else
-                                                                  subDomain:SMSubdomainDefault
-#endif
-                                                                     domain:STACKMOB_APP_DOMAIN
-                                                             userObjectName:STACKMOB_USER_OBJECT_NAME
-                                                           apiVersionNumber:[NSNumber numberWithInt:STACKMOB_API_VERSION]];
-#else
-#warning "No configuration found"
-#endif
-            
-        }
-        _sharedManager.requests = [NSMutableArray array];
-        _sharedManager.callbacks = [NSMutableArray array];
-        _sharedManager.cookieStore = [[StackMobCookieStore alloc] initWithSession:_sharedManager.session];
+        _sharedManager.client = [RKClient clientWithBaseURL:[NSString stringWithFormat:@"http://api.%@.%@", STACKMOB_APP_MOB, STACKMOB_APP_DOMAIN]];  
+        _sharedManager.client.OAuth1ConsumerKey = STACKMOB_PUBLIC_KEY;
+        _sharedManager.client.OAuth1ConsumerSecret = STACKMOB_PRIVATE_KEY;
+        _sharedManager.client.authenticationType = RKRequestAuthenticationTypeOAuth1;
+        [_sharedManager.client setValue:[NSString stringWithFormat:@"application/vnd.stackmob+json; version=%d", STACKMOB_API_VERSION] forHTTPHeaderField:@"Accept"];
     }
     return _sharedManager;
 }
@@ -411,10 +382,8 @@ static SMEnvironment environment;
 # pragma mark - CRUD methods
 
 - (StackMobRequest *)get:(NSString *)path withArguments:(NSDictionary *)arguments andCallback:(StackMobCallback)callback{
-    StackMobRequest *request = [StackMobRequest requestForMethod:path
-                                                   withArguments:arguments
-                                                    withHttpVerb:GET]; 
-    [self queueRequest:request andCallback:callback];
+    RKRequest *req = [RKRequest requestWithURL:[[self client] baseURL] delegate:nil];
+    [[self client] requestWithResourcePath:path  delegate:nil]
     return request;
 }
 
