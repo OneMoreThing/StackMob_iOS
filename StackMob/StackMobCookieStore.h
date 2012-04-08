@@ -14,6 +14,7 @@
 
 #import <Foundation/Foundation.h>
 #include "StackMobRequest.h"
+@class StackMobRequest;
 
 @interface StackMobCookieStore : NSObject
 

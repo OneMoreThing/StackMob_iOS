@@ -16,8 +16,10 @@
 #import "StackMobConfiguration.h"
 #import "StackMobQuery.h"
 #import "External/RestKit/Vendor/JSONKit/JSONKit.h"
+#import <RestKit/RestKit.h>
 
 @class StackMob;
+typedef void (^StackMobCallback)(BOOL success, id result);
 
 typedef enum {
 	GET,
@@ -28,7 +30,7 @@ typedef enum {
 
 @protocol SMRequestDelegate;
 
-@interface StackMobRequest : NSObject
+@interface StackMobRequest : NSObject <RKRequestDelegate>
 {
 	NSURLConnection*		mConnection;
 	id<SMRequestDelegate>	mDelegate;
@@ -44,6 +46,8 @@ typedef enum {
 	BOOL					_requestFinished;
 	NSString*				mHttpMethod;
 	NSHTTPURLResponse*		mHttpResponse;
+    RKRequest*              mBackingRequest;
+    StackMobCallback        mCallback;
 	
 	@protected
     BOOL userBased;
@@ -64,6 +68,8 @@ typedef enum {
 @property(readonly, getter=getBaseURL) NSString* baseURL;
 @property(readonly, getter=getURL) NSURL* url;
 @property(nonatomic) BOOL userBased;
+@property(readwrite, retain) RKRequest* backingRequest;
+@property(readwrite, retain) StackMobCallback callback;
 
 + (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb;
 
@@ -71,6 +77,8 @@ typedef enum {
  * Standard CRUD requests
  */
 + (id)request;
+//Remove before release
++ (id)requestFromRestKit:(RKRequest*)req;
 + (id)requestForMethod:(NSString*)method;
 + (id)requestForMethod:(NSString*)method withHttpVerb:(SMHttpVerb) httpVerb;
 + (id)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb) httpVerb;

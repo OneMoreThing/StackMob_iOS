@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "StackMobRequest.h"
 #import "StackMob.h"
+#import "StackMobRequest.h"
+#import "StackMobCookieStore.h"
 #import "Reachability.h"
 #import "OAConsumer.h"
 #import "OAMutableURLRequest.h"
@@ -43,6 +44,8 @@
 @synthesize httpResponse = mHttpResponse;
 @synthesize finished = _requestFinished;
 @synthesize userBased;
+@synthesize backingRequest = mBackingRequest;
+@synthesize callback = mCallback;
 
 # pragma mark - Memory Management
 - (void)dealloc
@@ -64,6 +67,14 @@
 + (id)request	
 {
 	return [[[StackMobRequest alloc] init] autorelease];
+}
+
++ (id)requestFromRestKit:(RKRequest*)req
+{
+    StackMobRequest *request = [StackMobRequest request];
+    request.backingRequest = req;
+    request.backingRequest.delegate = request;
+    return request;
 }
 
 + (id)userRequest
@@ -258,11 +269,14 @@
 
 - (void)sendRequest
 {
+    [[self backingRequest] send];
+    /*
 	_requestFinished = NO;
     
     SMLog(@"StackMob method: %@", self.method);
     SMLog(@"Request with url: %@", self.url);
     SMLog(@"Request with HTTP Method: %@", self.httpMethod);
+    //RKRequest *req = [[[StackMob stackmob] client] requestWithResourcePath:path  delegate:self];
     
 	OAConsumer *consumer = [[[OAConsumer alloc] initWithKey:session.apiKey
                                                     secret:session.apiSecret] autorelease];
@@ -302,6 +316,7 @@
     self.connectionError = nil;
 	self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease]; // Why retaining this when already retained by synthesized method?
     [request release];
+    */
 }
 
 - (void)setBodyForRequest:(OAMutableURLRequest *)request {
@@ -482,6 +497,19 @@
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"%@: %@", [super description], self.url];
+}
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response 
+{ 
+    StackMobCallback callback = [self callback];
+    self.result = [[response bodyAsString] objectFromJSONString];
+    callback([response isSuccessful], self.result);
+    _requestFinished = YES;
+}
+
+- (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error
+{
+      _requestFinished = YES;  
 }
 
 

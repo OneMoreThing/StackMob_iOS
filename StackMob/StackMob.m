@@ -26,7 +26,6 @@
 @property (nonatomic, retain) StackMobRequest *currentRequest;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, retain) NSLock *queueLock;
-@property (nonatomic, retain) RKClient *client;
 
 - (void)queueRequest:(StackMobRequest *)request andCallback:(StackMobCallback)callback;
 - (void)run;
@@ -76,6 +75,11 @@ static SMEnvironment environment;
         _sharedManager.requests = [NSMutableArray array];
         _sharedManager.callbacks = [NSMutableArray array];
         _sharedManager.queueLock = [[NSLock alloc] init];
+        _sharedManager.client = [RKClient clientWithBaseURL:[NSString stringWithFormat:@"http://api.%@.%@", STACKMOB_APP_MOB, STACKMOB_APP_DOMAIN]];  
+        _sharedManager.client.OAuth1ConsumerKey = STACKMOB_PUBLIC_KEY;
+        _sharedManager.client.OAuth1ConsumerSecret = STACKMOB_PRIVATE_KEY;
+        _sharedManager.client.authenticationType = RKRequestAuthenticationTypeOAuth1;
+        [_sharedManager.client setValue:[NSString stringWithFormat:@"application/vnd.stackmob+json; version=%d", STACKMOB_API_VERSION] forHTTPHeaderField:@"Accept"];
     }
     return _sharedManager;
 }
@@ -382,15 +386,16 @@ static SMEnvironment environment;
 # pragma mark - CRUD methods
 
 - (StackMobRequest *)get:(NSString *)path withArguments:(NSDictionary *)arguments andCallback:(StackMobCallback)callback{
-    RKRequest *req = [RKRequest requestWithURL:[[self client] baseURL] delegate:nil];
-    [[self client] requestWithResourcePath:path  delegate:nil]
-    return request;
+    if ([arguments count] > 0) {
+		path = [[path stringByAppendingString:@"?"] stringByAppendingString:[arguments queryString]];
+	}
+    StackMobRequest *req = [StackMobRequest requestFromRestKit:[_client requestWithResourcePath:path delegate:nil]];
+    req.callback = callback;
+    return req;
 }
 
 - (StackMobRequest *)get:(NSString *)path withQuery:(StackMobQuery *)query andCallback:(StackMobCallback)callback {
-    StackMobRequest *request = [StackMobRequest requestForMethod:path withQuery:query withHttpVerb:GET];
-    [self queueRequest:request andCallback:callback];
-    return request;
+    return [self get:path withArguments:[query params]  andCallback:callback];
 }
 
 - (StackMobRequest *)get:(NSString *)path withCallback:(StackMobCallback)callback

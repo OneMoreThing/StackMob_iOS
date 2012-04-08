@@ -19,7 +19,7 @@
 #import "StackMobConfiguration.h"
 #import "StackMobCookieStore.h"
 #import "SMFile.h"
-#import <RestKit.h>
+#import <RestKit/RestKit.h>
 
 typedef enum {
     SMEnvironmentProduction = 0,
@@ -27,7 +27,6 @@ typedef enum {
 } SMEnvironment;
 
 
-typedef void (^StackMobCallback)(BOOL success, id result);
 
 @protocol StackMobSessionDelegate <NSObject>
 
@@ -37,12 +36,19 @@ typedef void (^StackMobCallback)(BOOL success, id result);
 
 @end
 
+
+@class StackMobRequest;
+@protocol SMRequestDelegate
+@end
+@class StackMobCookieStore;
+
 @interface StackMob : NSObject <SMRequestDelegate>
 
 @property (nonatomic, retain) StackMobSession *session;
 @property (nonatomic, retain) NSMutableArray *callbacks;
 @property (nonatomic, retain) NSMutableArray *requests;
 @property (nonatomic, retain) StackMobCookieStore *cookieStore;
+@property (nonatomic, retain) RKClient *client;
 
 @property (nonatomic, retain) id<StackMobSessionDelegate> sessionDelegate;
 
