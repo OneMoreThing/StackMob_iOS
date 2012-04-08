@@ -48,7 +48,7 @@
     self = [super init];
     if (self) {
         self.bulkArguments = [NSArray array];
-        self.httpMethod = [StackMobRequest stringFromHttpVerb:POST];
+        self.httpMethod = POST;
     }
     return self;
 }

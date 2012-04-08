@@ -18,14 +18,14 @@
 
 + (id)requestForMethod:(NSString*)method {
     StackMobRequest *r = [[[StackMobPushRequest alloc] init] autorelease];
-    r.httpMethod = [self stringFromHttpVerb:POST];
+    r.httpMethod = POST;
     r.method = method;
     return r;
 }
 
 + (id)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments {
     StackMobRequest *r = [[[StackMobPushRequest alloc] init] autorelease];
-    r.httpMethod = [self stringFromHttpVerb:POST];
+    r.httpMethod = POST;
     r.method = method;
     if(arguments != nil) {
         [r setArguments: arguments];

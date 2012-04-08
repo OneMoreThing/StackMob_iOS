@@ -20,7 +20,7 @@
 {
 	StackMobHerokuRequest *request = [[[StackMobHerokuRequest alloc] init] autorelease];
 	request.method = method;
-	request.httpMethod = [self stringFromHttpVerb:httpVerb];
+	request.httpMethod = httpVerb;
 	if (arguments != nil) {
 		[request setArguments:arguments];
 	}

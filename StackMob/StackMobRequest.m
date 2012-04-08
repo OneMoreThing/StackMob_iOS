@@ -27,6 +27,8 @@
 
 @interface StackMobRequest (Private)
 + (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb;
++ (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb;
++ (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb;
 - (void)setBodyForRequest:(OAMutableURLRequest *)request;
 - (NSString*)getAcceptHeaderForVersion:(NSNumber *)version;
 @end
@@ -35,12 +37,10 @@
 
 @synthesize connection = mConnection;
 @synthesize delegate = mDelegate;
-@synthesize method = mMethod;
 @synthesize isSecure = mIsSecure;
 @synthesize result = mResult;
 @synthesize connectionError = _connectionError;
 @synthesize body;
-@synthesize httpMethod = mHttpMethod;
 @synthesize httpResponse = mHttpResponse;
 @synthesize finished = _requestFinished;
 @synthesize userBased;
@@ -54,9 +54,7 @@
 	[mConnectionData release];
 	[mConnection release];
 	[mDelegate release];
-	[mMethod release];
 	[mResult release];
-	[mHttpMethod release];
 	[mHttpResponse release];
     [mHeaders release];    
 	[super dealloc];
@@ -66,7 +64,9 @@
 
 + (id)request	
 {
-	return [[[StackMobRequest alloc] init] autorelease];
+	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
+    request.backingRequest = [[[StackMob stackmob] client] requestWithResourcePath:nil delegate:request];
+    return request;
 }
 
 + (id)requestFromRestKit:(RKRequest*)req
@@ -101,10 +101,11 @@
 
 + (id)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb
 {
-	StackMobRequest* request = [StackMobRequest request];
-	request.method = method;
-	request.httpMethod = [self stringFromHttpVerb:httpVerb];
-	if (arguments != nil) {
+	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
+    request.backingRequest = [[[StackMob stackmob] client]  requestWithResourcePath:method delegate:request];
+    request.backingRequest.method = [StackMobRequest restKitVerbFromStackMob:httpVerb];
+	if (arguments != nil)
+    {
 		[request setArguments:arguments];
 	}
 	return request;
@@ -112,39 +113,44 @@
 
 + (id)userRequestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb
 {
-	StackMobRequest* request = [StackMobRequest userRequest];
-	request.method = method;
-	request.httpMethod = [self stringFromHttpVerb:httpVerb];
-	if (arguments != nil) {
+	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
+    request.userBased = YES;
+    request.backingRequest = [[[StackMob stackmob] client]  requestWithResourcePath:method delegate:request];
+    request.backingRequest.method = [StackMobRequest restKitVerbFromStackMob:httpVerb];
+	if (arguments != nil)
+    {
 		[request setArguments:arguments];
 	}
 	return request;
 }
 
-+ (id)userRequestForMethod:(NSString *)method withQuery:(StackMobQuery *)query withHttpVerb:(SMHttpVerb)httpVerb {
++ (id)userRequestForMethod:(NSString *)method withQuery:(StackMobQuery *)query withHttpVerb:(SMHttpVerb)httpVerb
+{
     StackMobRequest *request = [StackMobRequest userRequestForMethod:method withArguments:query.params withHttpVerb:httpVerb];
     [request setHeaders:query.headers];
     return request;
 }
 
-+ (id)requestForMethod:(NSString*)method withQuery:(StackMobQuery *)query withHttpVerb:(SMHttpVerb) httpVerb {
++ (id)requestForMethod:(NSString*)method withQuery:(StackMobQuery *)query withHttpVerb:(SMHttpVerb) httpVerb
+{
     StackMobRequest *request = [StackMobRequest requestForMethod:method withArguments:[query params] withHttpVerb:httpVerb];
     [request setHeaders:query.headers];
     return request;
 }
 
 
-+ (id)requestForMethod:(NSString *)method withData:(NSData *)data{
++ (id)requestForMethod:(NSString *)method withData:(NSData *)data
+{
     StackMobRequest *request = [StackMobRequest request];
     request.method = method;
-    request.httpMethod = [self stringFromHttpVerb:POST];
+    request.httpMethod = POST;
     request.body = data;
     return request;
 }
 
 + (id)pushRequestWithArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb) httpVerb {
 	StackMobRequest* request = [StackMobPushRequest request];
-	request.httpMethod = [self stringFromHttpVerb:httpVerb];
+	request.httpMethod = httpVerb;
 	if (arguments != nil) {
 		[request setArguments:arguments];
 	}
@@ -165,11 +171,40 @@
 	}
 }
 
++ (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb
+{
+	switch (httpVerb) {
+		case POST:
+			return RKRequestMethodPOST;	
+		case PUT:
+			return RKRequestMethodPUT;
+		case DELETE:
+			return RKRequestMethodDELETE;	
+		default:
+			return RKRequestMethodGET;
+	}
+}
+
++ (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb
+{
+	switch (httpVerb) {
+		case RKRequestMethodPOST:
+			return POST;	
+		case RKRequestMethodPUT:
+			return PUT;
+		case RKRequestMethodDELETE:
+			return DELETE;	
+		default:
+			return GET;
+	}
+}
+
+
 - (NSString *)getBaseURL {
     if(mIsSecure) {
-        return [session secureURLForMethod:self.method isUserBased:userBased];
+        return [[[self backingRequest] URL] absoluteString];
     }
-    return [session urlForMethod:self.method isUserBased:userBased];
+    return [[[self backingRequest] URL] absoluteString];
 }
 
 - (NSURL*)getURL
@@ -181,7 +216,7 @@
     NSMutableArray *urlComponents = [NSMutableArray arrayWithCapacity:2];
     [urlComponents addObject:self.baseURL]; 
     
-    if (([[self httpMethod] isEqualToString:@"GET"] || [[self httpMethod] isEqualToString:@"DELETE"]) &&    
+    if ((self.httpMethod == GET || self.httpMethod == DELETE) &&    
 		[mArguments count] > 0) {
 		[urlComponents addObject:[mArguments queryString]];
 	}
@@ -191,6 +226,27 @@
     
 	return [NSURL URLWithString:urlString];
 }
+
+- (NSString *)getMethod 
+{
+    return [[self backingRequest] resourcePath];
+}
+
+- (void)setMethod:(NSString *)method
+{
+    [self backingRequest].resourcePath = method;
+}
+
+- (SMHttpVerb)getHTTPMethod 
+{
+    return [StackMobRequest stackMobVerbFromRestKit:[self backingRequest].method];
+}
+
+- (void)setHTTPMethod:(SMHttpVerb)httpMethod
+{
+    [self backingRequest].method = [StackMobRequest restKitVerbFromStackMob:httpMethod];
+}
+    
 
 - (NSInteger)getStatusCode
 {
@@ -203,7 +259,6 @@
 	self = [super init];
     if(self){
         self.delegate = nil;
-        self.method = nil;
         self.result = nil;
         mArguments = [[NSMutableDictionary alloc] init];
         mHeaders = [[NSMutableDictionary alloc] init];
@@ -320,7 +375,7 @@
 }
 
 - (void)setBodyForRequest:(OAMutableURLRequest *)request {
-    if (!([[self httpMethod] isEqualToString: @"GET"] || [[self httpMethod] isEqualToString:@"DELETE"])) {    
+    if (!(self.httpMethod == GET || self.httpMethod == DELETE)) {    
         NSData * postData = [self postBody];
 #if DEBUG
         NSString * postDataString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
@@ -466,12 +521,11 @@
 																	  realm:nil   // should we set a realm?
 														  signatureProvider:nil] autorelease]; // use the default method, HMAC-SHA1
 	[consumer release];
-	[request setHTTPMethod:[self httpMethod]];
 	
 	[request addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	[request addValue:@"deflate" forHTTPHeaderField:@"Accept-Encoding"];
 	[request prepare];
-	if (![[self httpMethod] isEqualToString: @"GET"]) {
+	if (self.httpMethod != GET) {
 		[request setHTTPBody:[[mArguments JSONString] dataUsingEncoding:NSUTF8StringEncoding]];	
 		NSString *contentType = [NSString stringWithFormat:@"application/json"];
 		[request addValue:contentType forHTTPHeaderField: @"Content-Type"];

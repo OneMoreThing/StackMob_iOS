@@ -38,11 +38,10 @@ typedef enum {
 
 
 @class StackMobRequest;
-@protocol SMRequestDelegate
-@end
+
 @class StackMobCookieStore;
 
-@interface StackMob : NSObject <SMRequestDelegate>
+@interface StackMob : NSObject
 
 @property (nonatomic, retain) StackMobSession *session;
 @property (nonatomic, retain) NSMutableArray *callbacks;

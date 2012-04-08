@@ -321,8 +321,7 @@ static SMEnvironment environment;
 {
     //?userIds=user1,user2,user3
     NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIds, @"userIds", nil];
-    StackMobPushRequest *request = [StackMobPushRequest requestForMethod:@"get_tokens_for_users_universal" withArguments:args];
-    request.httpMethod = @"GET";
+    StackMobPushRequest *request = [StackMobPushRequest requestForMethod:@"get_tokens_for_users_universal" withArguments:args withHttpVerb:GET];
     [self queueRequest:request andCallback:callback];
     return request;
 }
@@ -462,8 +461,7 @@ static SMEnvironment environment;
 
 - (StackMobRequest *)put:(NSString *)path withId:(id)primaryId andField:(NSString *)relField andArguments:(NSArray *)args andCallback:(StackMobCallback)callback {
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@", path, primaryId, relField];
-    StackMobBulkRequest *request = [StackMobBulkRequest requestForMethod:fullPath withArguments:args];
-    request.httpMethod = [StackMobRequest stringFromHttpVerb:PUT];
+    StackMobBulkRequest *request = [StackMobBulkRequest requestForMethod:fullPath withArguments:args withHttpVerb:PUT];
     
     [self queueRequest:request andCallback:callback];
     
