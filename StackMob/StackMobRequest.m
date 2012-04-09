@@ -29,6 +29,7 @@
 + (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb;
 + (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb;
 - (void)setBodyForRequest:(OAMutableURLRequest *)request;
++ (NSData *)JsonifyNSDictionary:(NSMutableDictionary *)dict withErrorOutput:(NSError **)error;
 @end
 
 @implementation StackMobRequest;
@@ -197,6 +198,29 @@
     [mHeaders setDictionary:headers];
 }
 
++ (NSData *)JsonifyNSDictionary:(NSMutableDictionary *)dict withErrorOutput:(NSError **)error
+{
+    
+    static id(^unsupportedClassSerializerBlock)(id) = ^id(id object) {
+        if ( [object isKindOfClass:[NSData class]] ) {
+            NSString* base64String = [(NSData*)object JSON];
+            
+            return base64String;
+        }
+        else if([object isKindOfClass:[SMFile class]]) {
+            return [(SMFile *)object JSON];
+        }
+        else {
+            return nil;
+        }
+    };
+    
+    NSData * json = [dict JSONDataWithOptions:JKSerializeOptionNone
+        serializeUnsupportedClassesUsingBlock:unsupportedClassSerializerBlock
+                                        error:error];
+    return json;
+}
+
 - (void)sendRequest
 {
     _requestFinished = NO;
@@ -215,7 +239,7 @@
     else
     {
         self.backingRequest.URL = [RKURL URLWithBaseURLString:self.baseURL resourcePath:self.resourcePath];
-        self.backingRequest.params = mArguments;
+        self.backingRequest.HTTPBody = [self postBody];
     }
     [self.backingRequest send];
 }
@@ -225,6 +249,11 @@
     self.callback = callback;
     [self sendRequest];
     return self;
+}
+
+- (NSData *)postBody {
+    NSError* error = nil;
+    return [StackMobRequest JsonifyNSDictionary:mArguments withErrorOutput:&error];
 }
 
 - (void)cancel

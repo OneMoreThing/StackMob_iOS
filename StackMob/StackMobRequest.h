@@ -119,6 +119,9 @@ typedef enum {
  */
 - (void)cancel;
 
+// return the post body as NSData
+- (NSData *)postBody;
+
 
 @end
 
