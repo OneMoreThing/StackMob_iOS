@@ -28,12 +28,9 @@ typedef enum {
 	DELETE
 } SMHttpVerb;
 
-@protocol SMRequestDelegate;
-
 @interface StackMobRequest : NSObject <RKRequestDelegate>
 {
 	NSURLConnection*		mConnection;
-	id<SMRequestDelegate>	mDelegate;
 	SEL						mSelector;
     BOOL          mIsSecure;
 	NSMutableDictionary*	mArguments;
@@ -56,7 +53,6 @@ typedef enum {
 @property(readwrite, assign, getter=getMethod, setter=setMethod:) NSString* method;
 @property(readwrite, assign, getter=getHTTPMethod, setter=setHTTPMethod:) SMHttpVerb httpMethod;
 @property(readwrite) BOOL isSecure;
-@property(readwrite, retain) NSURLConnection* connection;
 @property(readwrite, retain) NSDictionary* result;
 @property(readwrite, retain) NSError* connectionError;
 @property(readwrite, retain) NSData *body;
@@ -108,10 +104,6 @@ typedef enum {
  * Set parameters for requests
  */
 - (void)setArguments:(NSDictionary*)arguments;
-- (void)setValue:(NSString*)value forArgument:(NSString*)argument;
-- (void)setInteger:(NSUInteger)value forArgument:(NSString*)argument;
-- (void)setBool:(BOOL)value forArgument:(NSString*)argument;
-
 /*
  * Set headers for requests, overwrites all headers set for the request
  * @param headers, the headers to set
@@ -128,18 +120,6 @@ typedef enum {
  */
 - (void)cancel;
 
-/* Send a synchronous request
- * This is useful if you are creating requests in a separate thread already
- * @param address of NSError
- */
-- (id)sendSynchronousRequestProvidingError:(NSError**)error __attribute__((deprecated));
-- (id)sendSynchronousRequest;
-
-// return the post body as NSData
-- (NSData *)postBody;
-
-/* translate enum to string */
-+ (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb;
 
 @end
 

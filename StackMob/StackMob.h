@@ -44,7 +44,6 @@ typedef enum {
 @interface StackMob : NSObject
 
 @property (nonatomic, retain) StackMobSession *session;
-@property (nonatomic, retain) NSMutableArray *callbacks;
 @property (nonatomic, retain) NSMutableArray *requests;
 @property (nonatomic, retain) StackMobCookieStore *cookieStore;
 @property (nonatomic, retain) RKClient *client;

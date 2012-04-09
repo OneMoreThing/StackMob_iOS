@@ -26,7 +26,6 @@
 #import "SMFile.h"
 
 @interface StackMobRequest (Private)
-+ (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb;
 + (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb;
 + (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb;
 - (void)setBodyForRequest:(OAMutableURLRequest *)request;
@@ -35,7 +34,6 @@
 
 @implementation StackMobRequest;
 
-@synthesize connection = mConnection;
 @synthesize delegate = mDelegate;
 @synthesize isSecure = mIsSecure;
 @synthesize result = mResult;
@@ -157,49 +155,6 @@
 	return request;
 }
 
-+ (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb
-{
-	switch (httpVerb) {
-		case POST:
-			return @"POST";	
-		case PUT:
-			return @"PUT";
-		case DELETE:
-			return @"DELETE";	
-		default:
-			return @"GET";
-	}
-}
-
-+ (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb
-{
-	switch (httpVerb) {
-		case POST:
-			return RKRequestMethodPOST;	
-		case PUT:
-			return RKRequestMethodPUT;
-		case DELETE:
-			return RKRequestMethodDELETE;	
-		default:
-			return RKRequestMethodGET;
-	}
-}
-
-+ (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb
-{
-	switch (httpVerb) {
-		case RKRequestMethodPOST:
-			return POST;	
-		case RKRequestMethodPUT:
-			return PUT;
-		case RKRequestMethodDELETE:
-			return DELETE;	
-		default:
-			return GET;
-	}
-}
-
-
 - (NSString *)getBaseURL {
     if(mIsSecure) {
         return [[[self backingRequest] URL] absoluteString];
@@ -276,21 +231,6 @@
 	[mArguments setDictionary:arguments];
 }
 
-- (void)setValue:(NSString*)value forArgument:(NSString*)argument
-{
-	[mArguments setValue:value forKey:argument];
-}
-
-- (void)setInteger:(NSUInteger)value forArgument:(NSString*)argument
-{
-	[mArguments setValue:[NSString stringWithFormat:@"%u", value] forKey:argument];
-}
-
-- (void)setBool:(BOOL)value forArgument:(NSString*)argument
-{
-	[mArguments setValue:(value ? @"true" : @"false") forKey:argument];
-}
-
 - (void)setHeaders:(NSDictionary *)headers {
     [mHeaders setDictionary:headers];
 }
@@ -324,229 +264,16 @@
 
 - (void)sendRequest
 {
-    [[self backingRequest] send];
-    /*
-	_requestFinished = NO;
-    
+    _requestFinished = NO;
     SMLog(@"StackMob method: %@", self.method);
     SMLog(@"Request with url: %@", self.url);
     SMLog(@"Request with HTTP Method: %@", self.httpMethod);
-    //RKRequest *req = [[[StackMob stackmob] client] requestWithResourcePath:path  delegate:self];
-    
-	OAConsumer *consumer = [[[OAConsumer alloc] initWithKey:session.apiKey
-                                                    secret:session.apiSecret] autorelease];
-    
-	OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:self.url
-																   consumer:consumer
-																	  token:nil
-																	  realm:nil
-                                    
-														  signatureProvider:nil]; // use the default method, HMAC-SHA1
-    SMLog(@"httpMethod %@", [self httpMethod]);
-    if([self.method isEqualToString:@"startsession"]){
-        [mArguments setValue:[StackMobClientData sharedClientData].clientDataString forKey:@"cd"];
-    }
-	[request setHTTPMethod:[self httpMethod]];
-    
-	[request addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-	[request addValue:@"deflate" forHTTPHeaderField:@"Accept-Encoding"];
-    [request addValue:[session userAgentString] forHTTPHeaderField:@"User-Agent"];
-    [request addValue:[self getAcceptHeaderForVersion:[session apiVersionNumber]] forHTTPHeaderField:@"Accept"];
-    for(NSString *header in mHeaders) {
-        if (!([header isEqualToString:@"Accept-Encoding"] || [header isEqualToString:@"User-Agent"] || [header isEqualToString:@"Content-Type"])) {
-            [request addValue:(NSString *)[mHeaders objectForKey:header] forHTTPHeaderField:header];
-        }
-    }
-    
-    [request addValue:[[[StackMob stackmob] cookieStore] cookieHeader] forHTTPHeaderField:@"Cookie"];
-    
-	[request prepare];
-    [self setBodyForRequest:request];
-    
-    
-    SMLog(@"StackMobRequest: sending asynchronous oauth request: %@", request);
-    
-	[mConnectionData setLength:0];
-	self.result = nil;
-    self.connectionError = nil;
-	self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease]; // Why retaining this when already retained by synthesized method?
-    [request release];
-    */
-}
-
-- (void)setBodyForRequest:(OAMutableURLRequest *)request {
-    if (!(self.httpMethod == GET || self.httpMethod == DELETE)) {    
-        NSData * postData = [self postBody];
-#if DEBUG
-        NSString * postDataString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
-        //Chop out big binary blobs that would make the logs unreadable
-        NSString *binaryMatcher = @"(Content-Transfer-Encoding: base64)([^\"]{10})([^\"]*)(\")";
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:binaryMatcher options:0 error:NULL];
-        postDataString = [regex stringByReplacingMatchesInString:postDataString
-                                                         options:0
-                                                           range:NSMakeRange(0, [postDataString length])
-                                                    withTemplate:@"$1$2(truncated)$4"];
-        SMLog(@"POST Data: %@", postDataString);
-#endif
-        [request setHTTPBody:postData];	
-        NSString *contentType = [NSString stringWithFormat:@"application/json"];
-        [request addValue:contentType forHTTPHeaderField: @"Content-Type"]; 
-	}
-}
-
-- (NSData *)postBody {
-    NSError* error = nil;
-    return [StackMobRequest JsonifyNSDictionary:mArguments withErrorOutput:&error];
+    [[self backingRequest] send];
 }
 
 - (void)cancel
 {
-	[self.connection cancel];
-	self.connection = nil;
-}
-
-- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse*)response {
-	mHttpResponse = [(NSHTTPURLResponse*)response copy];
-}
-
-- (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data
-{
-	if (!data) {
-		SMLog(@"StackMobRequest: Received data but it was nil");
-		return;
-	}
-    
-	[mConnectionData appendData:data];
-	
-    SMLog(@"StackMobRequest: Got data of length %u", [mConnectionData length]);
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	_requestFinished = YES;
-    
-	SMLog(@"StackMobRequest %p: Connection failed! Error - %@ %@",
-          self,
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-	// inform the user
-	self.result = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], @"statusDetails", nil];  
-	if (self.delegate && [self.delegate respondsToSelector:@selector(requestCompleted:)])
-        [[self delegate] requestCompleted:self];
-}
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection*)connection
-{
-	_requestFinished = YES;
-    
-    SMLog(@"StackMobRequest %p: Received Request: %@", self, self.method);
-    
-	NSString *textResult = nil;
-	NSDictionary *result = nil;
-    NSInteger statusCode = [self getStatusCode];
-    
-    SMLog(@"RESPONSE CODE %d", statusCode);
-    if ([mConnectionData length] > 0) {
-        textResult = [[[NSString alloc] initWithData:mConnectionData encoding:NSUTF8StringEncoding] autorelease];
-        SMLog(@"RESPONSE BODY %@", textResult);
-    }
-    
-    
-    if (textResult == nil) {
-        result = [NSDictionary dictionary];
-    }   
-    else {
-        @try{
-            [mConnectionData setLength:0];
-            if (statusCode < 400) {
-                result = [textResult objectFromJSONString];
-            } else {
-                NSDictionary *errResult = (NSDictionary *)[textResult objectFromJSONString]; 
-                NSString *failMsg;
-                if ([errResult objectForKey:@"error"] == nil) {
-                    failMsg = [NSString stringWithFormat:@"Response failed with code: %d", statusCode];
-                    
-                } else {
-                    failMsg = [errResult objectForKey:@"error"];
-                }
-                result = [NSError errorWithDomain:@"StackMob"         
-                                             code:1 
-                                         userInfo:[NSDictionary dictionaryWithObjectsAndKeys:failMsg, NSLocalizedDescriptionKey, nil]];   
-            }
-        }
-        @catch (NSException *e) { // catch parsing errors
-            NSString *failMsg = [NSString stringWithFormat:@"Response failed with code: %d", statusCode];
-            result = [NSError errorWithDomain:@"StackMob"         
-                                         code:1 
-                                     userInfo:[NSDictionary dictionaryWithObjectsAndKeys:failMsg, NSLocalizedDescriptionKey, nil]];
-            SMLog(@"Unable to parse json '%@'", textResult);
-        }
-    }
-    
-    SMLog(@"Request Processed: %@", self.method);
-    
-    self.result = result;
-	
-    if (!self.delegate) SMLog(@"No delegate");
-    
-	if (self.delegate && [self.delegate respondsToSelector:@selector(requestCompleted:)]){
-        SMLog(@"Calling delegate %d, self %d", [mDelegate retainCount], [self retainCount]);
-        [self.delegate requestCompleted:self];
-    } else {
-        SMLog(@"Delegate does not respond to selector\ndelegate: %@", mDelegate);
-    }
-}
-
-- (id) sendSynchronousRequestProvidingError:(NSError**)error {
-    SMLog(@"Sending Request: %@", self.method);
-    SMLog(@"Request URL: %@", self.url);
-    SMLog(@"Request HTTP Method: %@", self.httpMethod);
-    id result = [self sendSynchronousRequest];
-    if(error)
-        *error = self.connectionError;
-    return result;
-}
-
-- (id) sendSynchronousRequest {
-    SMLog(@"StackMobRequest %p: Sending Synch Request httpMethod=%@ method=%@ url=%@", self, self.httpMethod, self.method, self.url);
-	
-	OAConsumer *consumer = [[OAConsumer alloc] initWithKey:session.apiKey
-													secret:session.apiSecret];
-	
-	OAMutableURLRequest *request = [[[OAMutableURLRequest alloc] initWithURL:self.url
-																   consumer:consumer
-																	  token:nil   // we don't need a token
-																	  realm:nil   // should we set a realm?
-														  signatureProvider:nil] autorelease]; // use the default method, HMAC-SHA1
-	[consumer release];
-	
-	[request addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-	[request addValue:@"deflate" forHTTPHeaderField:@"Accept-Encoding"];
-	[request prepare];
-	if (self.httpMethod != GET) {
-		[request setHTTPBody:[[mArguments JSONString] dataUsingEncoding:NSUTF8StringEncoding]];	
-		NSString *contentType = [NSString stringWithFormat:@"application/json"];
-		[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-	}
-    [request addValue:[self getAcceptHeaderForVersion:[session apiVersionNumber]] forHTTPHeaderField:@"Accept"];
-	
-	[mConnectionData setLength:0];
-    
-    SMLog(@"StackMobRequest %p: sending synchronous oauth request: %@", self, request);
-    
-    _requestFinished = NO;
-    self.connectionError = nil;
-    self.delegate = nil;
-    self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
-    
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:0.1];
-    while (!_requestFinished && [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil]) {
-        loopUntil = [NSDate dateWithTimeIntervalSinceNow:0.1];
-    }
-    
-    return self.result;
+    [[self backingRequest] cancel];
 }
 
 - (NSString*) description {
@@ -555,15 +282,51 @@
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response 
 { 
-    StackMobCallback callback = [self callback];
+    SMLog(@"StackMobRequest %p: Received Request: %@", self, self.method)
     self.result = [[response bodyAsString] objectFromJSONString];
-    callback([response isSuccessful], self.result);
+    [self callback]([response isSuccessful], self.result);
     _requestFinished = YES;
 }
 
 - (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error
 {
-      _requestFinished = YES;  
+    SMLog(@"StackMobRequest %p: Connection failed! Error - %@ %@",
+          self,
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    self.result = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], @"statusDetails", nil];  
+    [self callback](NO, self.result);
+    _requestFinished = YES;  
+
+}
+
+
++ (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb
+{
+	switch (httpVerb) {
+		case POST:
+			return RKRequestMethodPOST;	
+		case PUT:
+			return RKRequestMethodPUT;
+		case DELETE:
+			return RKRequestMethodDELETE;	
+		default:
+			return RKRequestMethodGET;
+	}
+}
+
++ (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb
+{
+	switch (httpVerb) {
+		case RKRequestMethodPOST:
+			return POST;	
+		case RKRequestMethodPUT:
+			return PUT;
+		case RKRequestMethodDELETE:
+			return DELETE;	
+		default:
+			return GET;
+	}
 }
 
 
