@@ -33,8 +33,9 @@
     return r;
 }
 
-- (NSString *)getBaseURL {
-    return [[session pushURL] stringByAppendingFormat:@"/%@", self.method];
+- (NSString *)getBaseURL 
+{
+    return [session pushURL];
 }
 
 @end

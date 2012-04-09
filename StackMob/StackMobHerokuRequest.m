@@ -32,4 +32,14 @@
 	return [NSURL URLWithString:urlString];
 }
 
+- (NSString *)getBaseURL
+{
+    return [NSString stringWithFormat:@"http://%@", session.domain];
+}
+
+- (NSString*)getResourcePath
+{
+    return [NSString stringWithFormat:@"heroku/proxy/%@", self.method];
+}
+
 @end
