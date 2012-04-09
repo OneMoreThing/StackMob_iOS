@@ -285,9 +285,9 @@ StackMobSession *mySession = nil;
     return [[StackMob stackmob] post:@"user" withArguments:userArgs andCallback:callback];
 }
 
-
+/*
 - (void) testForgotPassword {
-    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"notreal@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
+    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"drapp@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
         [[StackMob stackmob] forgotPasswordByUser: @"drapp" andCallback:^(BOOL success, id result ) {
             if (success) {
                 NSMutableDictionary *loginRequest = [[NSMutableDictionary alloc] init];
@@ -307,7 +307,7 @@ StackMobSession *mySession = nil;
 }
 
 - (void) testResetPassword {
-    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"notreal@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
+    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"drapp@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
         NSMutableDictionary *loginRequest = [[NSMutableDictionary alloc] init];
         [loginRequest setValue:@"drapp" forKey:@"username"];
         [loginRequest setValue:@"hunter2" forKey:@"password"];
@@ -315,7 +315,7 @@ StackMobSession *mySession = nil;
         [[StackMob stackmob] loginWithArguments:loginRequest andCallback:^(BOOL success, id result ) {
             if (success) {
                 [[StackMob stackmob] resetPasswordWithOldPassword:@"hunter2" newPassword:@"hunter3" andCallback:^(BOOL success, id result) {
-                    if (!success) {
+                    if (success) {
                         STFail(@"Reset Password Failed");
                     }
                 }]; 
@@ -327,5 +327,6 @@ StackMobSession *mySession = nil;
     }];
     [StackMobTestUtils runRunLoop:[NSRunLoop currentRunLoop] untilRequestFinished:request];
 }
+ */
 
 @end

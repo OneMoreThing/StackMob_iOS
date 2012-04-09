@@ -57,6 +57,16 @@ static NSString *const SMSubdomainDefault = @"mob1";
 @property(nonatomic,readonly) NSString *pushURL;
 
 /**
+ * The URL used for regular requests
+ */
+@property(nonatomic,readonly) NSString *regularURL;
+
+/**
+ * The URL used for secure requests
+ */
+@property(nonatomic,readonly) NSString *secureURL;
+
+/**
  * Your application's API key, as passed to the constructor.
  */
 @property(nonatomic,readonly) NSString* apiKey;
@@ -185,22 +195,13 @@ static NSString *const SMSubdomainDefault = @"mob1";
                apiVersionNumber:(NSNumber*)apiVersionNumber;
 
 /**
- * Returns the formatted url for the passedMethod.
- *
- * @param method name of the method to be called
- * @param userBasedRequest whether or not to prepend the user with the user
- * model name
- */
-- (NSMutableString*)urlForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest;
-
-/**
- * Returns the formatted SSL url for the passedMethod.
+ * Returns the formatted resource path for the method
  *
  * @param name of the method to be called
  * @param userBasedRequest whether or not to prepend the user with the user
  * model name
  */
-- (NSMutableString*)secureURLForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest;
+- (NSString*) resourcePathForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest;
 
 /* 
  * Returns the User-Agent String

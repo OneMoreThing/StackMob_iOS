@@ -32,7 +32,8 @@ typedef enum {
 {
 	NSURLConnection*		mConnection;
 	SEL						mSelector;
-    BOOL          mIsSecure;
+    BOOL                    mIsSecure;
+    NSString*				mMethod;
 	NSMutableDictionary*	mArguments;
     NSMutableDictionary*    mHeaders;
 	NSMutableData*			mConnectionData;
@@ -48,7 +49,7 @@ typedef enum {
 	StackMobSession *session;
 }
 
-@property(readwrite, assign, getter=getMethod, setter=setMethod:) NSString* method;
+@property(readwrite, copy) NSString* method;
 @property(readwrite, assign, getter=getHTTPMethod, setter=setHTTPMethod:) SMHttpVerb httpMethod;
 @property(readwrite) BOOL isSecure;
 @property(readwrite, retain) NSDictionary* result;
@@ -58,6 +59,7 @@ typedef enum {
 @property(readonly, getter=getStatusCode) NSInteger statusCode;
 @property(readonly, getter=getBaseURL) NSString* baseURL;
 @property(readonly, getter=getURL) NSURL* url;
+@property(readonly, getter=getResourcePath) NSString* resourcePath;
 @property(nonatomic) BOOL userBased;
 @property(readwrite, retain) RKRequest* backingRequest;
 @property(readwrite, retain) StackMobCallback callback;
@@ -106,6 +108,10 @@ typedef enum {
  * Send a configured request and wait for callback
  */
 - (void)sendRequest;
+
+/*
+ * Send a configured request and wait for callback
+ */
 - (StackMobRequest*)sendRequestWithCallback:(StackMobCallback)callback;
 
 /*

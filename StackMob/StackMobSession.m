@@ -35,6 +35,8 @@ static StackMobSession* sharedSession = nil;
 @synthesize sessionKey = _sessionKey;
 @synthesize expirationDate = _expirationDate;
 @synthesize pushURL;
+@synthesize regularURL;
+@synthesize secureURL;
 
 + (StackMobSession*)session {
 	return sharedSession;
@@ -85,24 +87,10 @@ static StackMobSession* sharedSession = nil;
 	return session;
 }
 
-- (NSMutableString*)urlForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest isSecure:(BOOL)isSecure
+- (NSString*) resourcePathForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest
 {
-  NSMutableArray *parts = [NSMutableArray array];
-  [parts addObject:(isSecure ? secureURL : regularURL)];
-  
-  if(userBasedRequest) [parts addObject:self.userObjectName];
-  [parts addObject:method];
-  
-  NSMutableString *urlString = [NSMutableString stringWithString:[parts componentsJoinedByString:@"/"]];
-  return urlString;
-}
-
-- (NSMutableString*)secureURLForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest {
-  return  [self urlForMethod:method isUserBased:userBasedRequest isSecure:YES];
-}
-
-- (NSMutableString*)urlForMethod:(NSString*)method isUserBased:(BOOL)userBasedRequest {
-  return  [self urlForMethod:method isUserBased:userBasedRequest isSecure:NO];
+    NSString *resourcePath = userBasedRequest ? [NSString stringWithFormat:@"%@/", self.userObjectName] : @"";
+    return [resourcePath stringByAppendingString:method];
 }
 
 - (StackMobSession*)initWithKey:(NSString*)key 

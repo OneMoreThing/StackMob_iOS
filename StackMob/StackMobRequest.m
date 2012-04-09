@@ -33,6 +33,7 @@
 
 @implementation StackMobRequest;
 
+@synthesize method = mMethod;
 @synthesize isSecure = mIsSecure;
 @synthesize result = mResult;
 @synthesize connectionError = _connectionError;
@@ -88,6 +89,7 @@
 + (id)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb
 {
 	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
+    request.method = method;
     request.backingRequest = [[[StackMob stackmob] client]  requestWithResourcePath:method delegate:request];
     request.backingRequest.method = [StackMobRequest restKitVerbFromStackMob:httpVerb];
 	if (arguments != nil)
@@ -133,41 +135,24 @@
 	return request;
 }
 
-- (NSString *)getBaseURL {
+- (NSString *)getBaseURL 
+{
     if(mIsSecure) {
-        return [[[self backingRequest] URL] absoluteString];
+        return [session secureURL];
     }
-    return [[[self backingRequest] URL] absoluteString];
+    return [session regularURL];
 }
 
 - (NSURL*)getURL
 {
     // nil method is an invalid request
 	if(!self.method) return nil;
-    
-    // build URL and add query string if necessary
-    NSMutableArray *urlComponents = [NSMutableArray arrayWithCapacity:2];
-    [urlComponents addObject:self.baseURL]; 
-    
-    if ((self.httpMethod == GET || self.httpMethod == DELETE) &&    
-		[mArguments count] > 0) {
-		[urlComponents addObject:[mArguments queryString]];
-	}
-    
-    NSString *urlString = [urlComponents componentsJoinedByString:@"?"];
-    SMLog(@"%@", urlString);
-    
-	return [NSURL URLWithString:urlString];
+	return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", self.baseURL, self.resourcePath]];
 }
 
-- (NSString *)getMethod 
+- (NSString*)getResourcePath
 {
-    return [[self backingRequest] resourcePath];
-}
-
-- (void)setMethod:(NSString *)method
-{
-    [self backingRequest].resourcePath = method;
+    return [session resourcePathForMethod:self.method isUserBased:self.userBased];
 }
 
 - (SMHttpVerb)getHTTPMethod 
@@ -212,35 +197,27 @@
     [mHeaders setDictionary:headers];
 }
 
-+ (NSData *)JsonifyNSDictionary:(NSMutableDictionary *)dict withErrorOutput:(NSError **)error {
-    
-    static id(^unsupportedClassSerializerBlock)(id) = ^id(id object) {
-        if ( [object isKindOfClass:[NSData class]] ) {
-            NSString* base64String = [(NSData*)object JSON];
-            
-            return base64String;
-        }
-        else if([object isKindOfClass:[SMFile class]]) {
-            return [(SMFile *)object JSON];
-        }
-        else {
-            return nil;
-        }
-    };
-    
-    NSData * json = [dict JSONDataWithOptions:JKSerializeOptionNone
-        serializeUnsupportedClassesUsingBlock:unsupportedClassSerializerBlock
-                                        error:error];
-    return json;
-}
-
 - (void)sendRequest
 {
     _requestFinished = NO;
     SMLog(@"StackMob method: %@", self.method);
     SMLog(@"Request with url: %@", self.url);
     SMLog(@"Request with HTTP Method: %@", self.httpMethod);
-    [[self backingRequest] send];
+    if(mHeaders != nil && [mHeaders count] > 0) {
+        NSMutableDictionary *newHeaders = [NSMutableDictionary dictionaryWithDictionary:self.backingRequest.additionalHTTPHeaders];
+        [newHeaders addEntriesFromDictionary:mHeaders];
+        self.backingRequest.additionalHTTPHeaders = newHeaders;
+    }
+    if(self.httpMethod == GET || self.httpMethod == DELETE)
+    {
+        self.backingRequest.URL = [RKURL URLWithBaseURLString:self.baseURL resourcePath:self.resourcePath queryParams:mArguments];
+    }
+    else
+    {
+        self.backingRequest.URL = [RKURL URLWithBaseURLString:self.baseURL resourcePath:self.resourcePath];
+        self.backingRequest.params = mArguments;
+    }
+    [self.backingRequest send];
 }
 
 - (StackMobRequest*)sendRequestWithCallback:(StackMobCallback)callback
