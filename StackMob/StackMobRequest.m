@@ -29,16 +29,13 @@
 + (RKRequestMethod)restKitVerbFromStackMob:(SMHttpVerb)httpVerb;
 + (SMHttpVerb)stackMobVerbFromRestKit:(RKRequestMethod)httpVerb;
 - (void)setBodyForRequest:(OAMutableURLRequest *)request;
-- (NSString*)getAcceptHeaderForVersion:(NSNumber *)version;
 @end
 
 @implementation StackMobRequest;
 
-@synthesize delegate = mDelegate;
 @synthesize isSecure = mIsSecure;
 @synthesize result = mResult;
 @synthesize connectionError = _connectionError;
-@synthesize body;
 @synthesize httpResponse = mHttpResponse;
 @synthesize finished = _requestFinished;
 @synthesize userBased;
@@ -51,7 +48,6 @@
 	[self cancel];
 	[mConnectionData release];
 	[mConnection release];
-	[mDelegate release];
 	[mResult release];
 	[mHttpResponse release];
     [mHeaders release];    
@@ -64,14 +60,6 @@
 {
 	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
     request.backingRequest = [[[StackMob stackmob] client] requestWithResourcePath:nil delegate:request];
-    return request;
-}
-
-+ (id)requestFromRestKit:(RKRequest*)req
-{
-    StackMobRequest *request = [StackMobRequest request];
-    request.backingRequest = req;
-    request.backingRequest.delegate = request;
     return request;
 }
 
@@ -133,16 +121,6 @@
 {
     StackMobRequest *request = [StackMobRequest requestForMethod:method withArguments:[query params] withHttpVerb:httpVerb];
     [request setHeaders:query.headers];
-    return request;
-}
-
-
-+ (id)requestForMethod:(NSString *)method withData:(NSData *)data
-{
-    StackMobRequest *request = [StackMobRequest request];
-    request.method = method;
-    request.httpMethod = POST;
-    request.body = data;
     return request;
 }
 
@@ -213,7 +191,6 @@
 {
 	self = [super init];
     if(self){
-        self.delegate = nil;
         self.result = nil;
         mArguments = [[NSMutableDictionary alloc] init];
         mHeaders = [[NSMutableDictionary alloc] init];
@@ -257,11 +234,6 @@
     return json;
 }
 
-- (NSString*)getAcceptHeaderForVersion:(NSNumber *)version
-{
-    return [NSString stringWithFormat:@"application/vnd.stackmob+json; version=%d",[version intValue]];
-}
-
 - (void)sendRequest
 {
     _requestFinished = NO;
@@ -269,6 +241,13 @@
     SMLog(@"Request with url: %@", self.url);
     SMLog(@"Request with HTTP Method: %@", self.httpMethod);
     [[self backingRequest] send];
+}
+
+- (StackMobRequest*)sendRequestWithCallback:(StackMobCallback)callback
+{
+    self.callback = callback;
+    [self sendRequest];
+    return self;
 }
 
 - (void)cancel

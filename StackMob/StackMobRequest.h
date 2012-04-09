@@ -35,7 +35,6 @@ typedef enum {
     BOOL          mIsSecure;
 	NSMutableDictionary*	mArguments;
     NSMutableDictionary*    mHeaders;
-    NSData*                 mBody;
 	NSMutableData*			mConnectionData;
 	NSDictionary*			mResult;
     NSError*                mConnectionError;
@@ -49,13 +48,11 @@ typedef enum {
 	StackMobSession *session;
 }
 
-@property(readwrite, retain) id delegate;
 @property(readwrite, assign, getter=getMethod, setter=setMethod:) NSString* method;
 @property(readwrite, assign, getter=getHTTPMethod, setter=setHTTPMethod:) SMHttpVerb httpMethod;
 @property(readwrite) BOOL isSecure;
 @property(readwrite, retain) NSDictionary* result;
 @property(readwrite, retain) NSError* connectionError;
-@property(readwrite, retain) NSData *body;
 @property(readonly) BOOL finished;
 @property(readonly) NSHTTPURLResponse* httpResponse;
 @property(readonly, getter=getStatusCode) NSInteger statusCode;
@@ -65,19 +62,14 @@ typedef enum {
 @property(readwrite, retain) RKRequest* backingRequest;
 @property(readwrite, retain) StackMobCallback callback;
 
-+ (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb;
-
 /* 
  * Standard CRUD requests
  */
 + (id)request;
-//Remove before release
-+ (id)requestFromRestKit:(RKRequest*)req;
 + (id)requestForMethod:(NSString*)method;
 + (id)requestForMethod:(NSString*)method withHttpVerb:(SMHttpVerb) httpVerb;
 + (id)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb) httpVerb;
 + (id)requestForMethod:(NSString*)method withQuery:(StackMobQuery *)query withHttpVerb:(SMHttpVerb) httpVerb;
-+ (id)requestForMethod:(NSString *)method withData:(NSData *)data;
 
 /* 
  * User based requests 
@@ -114,6 +106,7 @@ typedef enum {
  * Send a configured request and wait for callback
  */
 - (void)sendRequest;
+- (StackMobRequest*)sendRequestWithCallback:(StackMobCallback)callback;
 
 /*
  * Cancel and ignore a request in progress

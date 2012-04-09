@@ -44,11 +44,16 @@ typedef enum {
 @interface StackMob : NSObject
 
 @property (nonatomic, retain) StackMobSession *session;
-@property (nonatomic, retain) NSMutableArray *requests;
 @property (nonatomic, retain) StackMobCookieStore *cookieStore;
 @property (nonatomic, retain) RKClient *client;
 
 @property (nonatomic, retain) id<StackMobSessionDelegate> sessionDelegate;
+
+/*
+ * Manually configure your session.  Subsequent requests for the StackMob
+ * singleton can use [StackMob stackmob]
+ */
++ (StackMob *)setApplication:(NSString *)apiKey secret:(NSString *)apiSecret appName:(NSString *)appName subDomain:(NSString *)subDomain domain:(NSString *)domain userObjectName:(NSString *)userObjectName apiVersionNumber:(NSNumber *)apiVersion;
 
 /*
  * Manually configure your session.  Subsequent requests for the StackMob
