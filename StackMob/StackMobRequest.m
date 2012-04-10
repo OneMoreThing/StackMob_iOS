@@ -89,28 +89,27 @@
 
 + (id)requestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb
 {
-	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
-    request.method = method;
-    request.backingRequest = [[[StackMob stackmob] client]  requestWithResourcePath:method delegate:request];
-    request.backingRequest.method = [StackMobRequest restKitVerbFromStackMob:httpVerb];
-	if (arguments != nil)
-    {
-		[request setArguments:arguments];
-	}
-	return request;
+	return [[[StackMobRequest alloc] initWithMethod:method withArguments:arguments withHttpVerb:httpVerb] autorelease]; 
 }
 
 + (id)userRequestForMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb)httpVerb
 {
-	StackMobRequest *request = [[[StackMobRequest alloc] init] autorelease];
+	StackMobRequest *request = [[[StackMobRequest alloc] initWithMethod:method withArguments:arguments withHttpVerb:httpVerb] autorelease]; 
     request.userBased = YES;
-    request.backingRequest = [[[StackMob stackmob] client]  requestWithResourcePath:method delegate:request];
-    request.backingRequest.method = [StackMobRequest restKitVerbFromStackMob:httpVerb];
+	return request;
+}
+
+- (id)initWithMethod:(NSString*)method withArguments:(NSDictionary*)arguments withHttpVerb:(SMHttpVerb) httpVerb
+{
+    self = [super init];
+    self.method = method;
+    self.backingRequest = [[[StackMob stackmob] client]  requestWithResourcePath:method delegate:self];
+    self.backingRequest.method = [StackMobRequest restKitVerbFromStackMob:httpVerb];
 	if (arguments != nil)
     {
-		[request setArguments:arguments];
+		[self setArguments:arguments];
 	}
-	return request;
+    return self;
 }
 
 + (id)userRequestForMethod:(NSString *)method withQuery:(StackMobQuery *)query withHttpVerb:(SMHttpVerb)httpVerb

@@ -36,6 +36,7 @@
 - (void) testRelatedDelete;
 - (void) testAPIList;
 - (void) testQueryString;
+- (void) testGetRequest;
 - (void) testBinaryFileUpload;
 - (void) testForgotPassword;
 - (void) testResetPassword;

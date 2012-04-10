@@ -14,5 +14,6 @@
 
 + (id)requestForMethod:(NSString *)method withArguments:(NSArray *)arguments;
 + (NSData *)JsonifyNSArray:(NSArray *)dict withErrorOutput:(NSError **)error;
+- (id)initWithMethod:(NSString *)method withArguments:(NSArray *)arguments withHttpVerb:(SMHttpVerb)httpVerb;
 
 @end

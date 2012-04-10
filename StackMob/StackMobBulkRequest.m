@@ -15,15 +15,18 @@
 @synthesize bulkArguments = _bulkArguments;
 
 + (id)requestForMethod:(NSString *)method withArguments:(NSDictionary *)arguments withHttpVerb:(SMHttpVerb)httpVerb {
-    return [StackMobBulkRequest requestForMethod:method withArguments:[NSArray arrayWithObject:arguments]];
+    return [[[StackMobBulkRequest alloc] initWithMethod:method withArguments:[NSArray arrayWithObject:arguments] withHttpVerb:httpVerb] autorelease];
 }
 
 + (id)requestForMethod:(NSString *)method withArguments:(NSArray *)arguments {
-    StackMobBulkRequest *request = [[[StackMobBulkRequest alloc] init] autorelease];
-    request.method = method;
-    request.bulkArguments = arguments;
-    
-    return request;
+    return [[[StackMobBulkRequest alloc] initWithMethod:method withArguments:[NSArray arrayWithObject:arguments] withHttpVerb:POST] autorelease];
+}
+
+- (id)initWithMethod:(NSString *)method withArguments:(NSArray *)arguments withHttpVerb:(SMHttpVerb)httpVerb
+{
+    self = [super initWithMethod:method withArguments:nil withHttpVerb:httpVerb];
+    self.bulkArguments = arguments;
+    return self;
 }
 
 + (NSData *)JsonifyNSArray:(NSArray *)arr withErrorOutput:(NSError **)error {
@@ -42,15 +45,6 @@
         serializeUnsupportedClassesUsingBlock:unsupportedClassSerializerBlock
                                         error:error];
     return json;
-}
-
-- (id) init {
-    self = [super init];
-    if (self) {
-        self.bulkArguments = [NSArray array];
-        self.httpMethod = POST;
-    }
-    return self;
 }
 
 - (NSData *)postBody {

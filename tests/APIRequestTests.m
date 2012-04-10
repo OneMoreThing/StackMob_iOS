@@ -36,32 +36,29 @@ StackMobSession *mySession = nil;
 	mySession = nil;
     [super tearDown];
 }
-
 - (void) testGet {
     StackMobQuery *q = [StackMobQuery query];
     [q field:@"username" mustEqualValue:@"ty"];
     [q field:@"createddate" mustBeGreaterThanOrEqualToValue:[NSNumber numberWithInt:2]];
+    StackMobRequest *request = [[StackMob stackmob] get:@"user" withQuery:q andCallback:^(BOOL success, id result) {
+        STAssertTrue(success, @"Get Request failed");
+    }];
+    [request sendRequest];
     
-	
-	StackMobRequest *request = [StackMobRequest requestForMethod:@"user" 
-                                                       withQuery:q
-												  withHttpVerb:GET];
-	[request sendRequest];
 	//we need to loop until the request comes back, its just a test its OK
     [StackMobTestUtils runRunLoop:[NSRunLoop currentRunLoop] untilRequestFinished:request];
-	    
+    
     STAssertTrue([[request result] isKindOfClass:[NSArray class]], @"Did not get a valid GET result");
 	request = nil;
-
 }
 
 - (void) testPost {
 	NSLog(@"IN TEST POST");
     NSMutableDictionary* userArgs = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-										@"Ty", @"firstname",
-										@"Amell", @"lastname",
-										@"ty@stackmob.com", @"email",
-										nil];
+                                     @"Ty", @"firstname",
+                                     @"Amell", @"lastname",
+                                     @"ty@stackmob.com", @"email",
+                                     nil];
 	
     StackMobRequest *request = [[StackMob stackmob] post:@"user" withArguments:userArgs andCallback:^(BOOL success, id result){
         if(success){
@@ -74,7 +71,7 @@ StackMobSession *mySession = nil;
             STFail(@"creating a user failed");
         }
     }];
-
+    
 	//we need to loop until the request comes back, its just a test its OK
     NSDictionary * result = [StackMobTestUtils runDefaultRunLoopAndGetDictionaryResultFromRequest:request];
     NSLog(@"result: %@", result);
@@ -246,6 +243,7 @@ StackMobSession *mySession = nil;
     STAssertEqualObjects([intArgs queryString], @"int=1", @"queryString generation is not correct");
 }
 
+
 /*
  * This test requires manual setup to pass. Your user2 schema must have a field "photo" of type binary. 
  * That should trigger it to upload the file to s3 rather than just storing the text
@@ -285,9 +283,8 @@ StackMobSession *mySession = nil;
     return [[StackMob stackmob] post:@"user" withArguments:userArgs andCallback:callback];
 }
 
-/*
 - (void) testForgotPassword {
-    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"drapp@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
+    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"notreal@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
         [[StackMob stackmob] forgotPasswordByUser: @"drapp" andCallback:^(BOOL success, id result ) {
             if (success) {
                 NSMutableDictionary *loginRequest = [[NSMutableDictionary alloc] init];
@@ -307,7 +304,7 @@ StackMobSession *mySession = nil;
 }
 
 - (void) testResetPassword {
-    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"drapp@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
+    StackMobRequest *request = [self ensureUser:@"drapp" withEmail:@"notreal@stackmob.com" withPassword:@"hunter2" andCallback:^(BOOL success, id result){
         NSMutableDictionary *loginRequest = [[NSMutableDictionary alloc] init];
         [loginRequest setValue:@"drapp" forKey:@"username"];
         [loginRequest setValue:@"hunter2" forKey:@"password"];
@@ -315,7 +312,7 @@ StackMobSession *mySession = nil;
         [[StackMob stackmob] loginWithArguments:loginRequest andCallback:^(BOOL success, id result ) {
             if (success) {
                 [[StackMob stackmob] resetPasswordWithOldPassword:@"hunter2" newPassword:@"hunter3" andCallback:^(BOOL success, id result) {
-                    if (success) {
+                    if (!success) {
                         STFail(@"Reset Password Failed");
                     }
                 }]; 
@@ -327,6 +324,5 @@ StackMobSession *mySession = nil;
     }];
     [StackMobTestUtils runRunLoop:[NSRunLoop currentRunLoop] untilRequestFinished:request];
 }
- */
 
 @end
