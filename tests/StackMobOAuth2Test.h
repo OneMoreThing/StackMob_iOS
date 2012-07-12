@@ -23,5 +23,7 @@
 - (void)createUser;
 - (void)deleteUser;
 - (void)testLoginAndLogoutWithOAuth2;
+- (void)testLoginAndLogoutWithOAuth2Facebook;
+- (void)testLoginAndLogoutWithOAuth2Twitter;
 - (void)changeOAuthVersion:(int)oAuthVersion;
 @end

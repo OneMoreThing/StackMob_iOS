@@ -15,8 +15,11 @@
 #import <Foundation/Foundation.h>
 #import "StackMob.h"
 
-#define USER_NAME @"bob"
-#define USER_PASSWORD @"bob"
+#define USER_NAME @"USER_NAME"
+#define USER_PASSWORD @"USER_PASSWORD"
+#define FB_TOKEN @"FB_TOKEN"
+#define TWITTER_TOKEN @"TWITTER_TOKEN"
+#define TWITTER_SECRET @"TWITTER_SECRET"
 
 extern NSString * const kAPIKey;
 extern NSString * const kAPISecret;

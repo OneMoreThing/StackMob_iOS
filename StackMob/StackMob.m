@@ -228,10 +228,21 @@ static SMEnvironment environment;
 # pragma mark - Facebook methods
 - (StackMobRequest *)loginWithFacebookToken:(NSString *)facebookToken andCallback:(StackMobCallback)callback
 {
+    StackMobRequest *request;
     NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:facebookToken, @"fb_at", nil];
-    StackMobRequest *request = [StackMobRequest userRequestForMethod:@"facebookLogin" withArguments:args withHttpVerb:GET];
-    request.isSecure = YES;
+    
+    if(self.session.oauthVersion == OAuth2)
+    {
+        request = [StackMobAccessTokenRequest requestForMethod:[NSString stringWithFormat:@"%@/facebookAccessToken", [self.session userObjectName]] withArguments:args];
+    }
+    else 
+    {
+        request = [StackMobRequest userRequestForMethod:@"facebookLogin" withArguments:args withHttpVerb:GET];
+        request.isSecure = YES;
+    }
+    
     [self queueRequest:request andCallback:callback];
+    
     return request;
 }
 
@@ -281,11 +292,24 @@ static SMEnvironment environment;
 
 - (StackMobRequest *)loginWithTwitterToken:(NSString *)token secret:(NSString *)secret andCallback:(StackMobCallback)callback
 {
+    
+    StackMobRequest *request;
     NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:token, @"tw_tk", secret, @"tw_ts", nil];
-    StackMobRequest *request = [StackMobRequest userRequestForMethod:@"twitterLogin" withArguments:args withHttpVerb:GET];
-    request.isSecure = YES;
+
+    
+    if(self.session.oauthVersion == OAuth2)
+    {
+        request = [StackMobAccessTokenRequest requestForMethod:[NSString stringWithFormat:@"%@/twitterAccessToken", [self.session userObjectName]] withArguments:args];
+    }
+    else 
+    {
+        request = [StackMobRequest userRequestForMethod:@"twitterLogin" withArguments:args withHttpVerb:GET];
+        request.isSecure = YES;
+    }
+    
     [self queueRequest:request andCallback:callback];
-    return request;    
+    
+    return request;
 }
 
 - (StackMobRequest *)linkUserWithTwitterToken:(NSString *)token secret:(NSString *)secret andCallback:(StackMobCallback)callback
