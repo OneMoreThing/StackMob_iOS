@@ -279,7 +279,7 @@
 																	  realm:nil
 														  signatureProvider:nil // use the default method, HMAC-SHA1
                                                                       nonce:nil
-                                                                  timestamp:[NSString stringWithFormat:@"%d", (long) [session.serverTime timeIntervalSince1970]]];
+                                                                  timestamp:[NSString stringWithFormat:@"%ld", (long) [session.serverTime timeIntervalSince1970]]];
     SMLog(@"httpMethod %@", [self httpMethod]);
     if([self.method isEqualToString:@"startsession"]){
         [mArguments setValue:[StackMobClientData sharedClientData].clientDataString forKey:@"cd"];
@@ -466,14 +466,14 @@
                     failMsg = [errResult objectForKey:@"error"];
                 }
                 result = [NSError errorWithDomain:@"StackMob"         
-                                             code:1 
-                                         userInfo:[NSDictionary dictionaryWithObjectsAndKeys:failMsg, NSLocalizedDescriptionKey, nil]];   
+                                             code:statusCode
+                                         userInfo:[NSDictionary dictionaryWithObjectsAndKeys:failMsg, NSLocalizedDescriptionKey, nil]];
             }
         }
         @catch (NSException *e) { // catch parsing errors
             NSString *failMsg = [NSString stringWithFormat:@"Response failed with code: %d", statusCode];
             result = [NSError errorWithDomain:@"StackMob"         
-                                         code:1 
+                                         code:statusCode
                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:failMsg, NSLocalizedDescriptionKey, nil]];
             SMLog(@"Unable to parse json '%@'", textResult);
         }
@@ -515,7 +515,7 @@
 																	  realm:nil   // should we set a realm?
 														  signatureProvider:nil
                                                                       nonce:nil
-                                                                  timestamp:[NSString stringWithFormat:@"%d", (long) [session.serverTime timeIntervalSince1970]]] autorelease]; // use the default method, HMAC-SHA1
+                                                                  timestamp:[NSString stringWithFormat:@"%ld", (long) [session.serverTime timeIntervalSince1970]]] autorelease]; // use the default method, HMAC-SHA1
 	[consumer release];
 	[request setHTTPMethod:[self httpMethod]];
 	

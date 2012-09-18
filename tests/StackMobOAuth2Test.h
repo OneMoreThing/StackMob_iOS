@@ -24,4 +24,5 @@
 - (void)deleteUser;
 - (void)testLoginAndLogoutWithOAuth2;
 - (void)changeOAuthVersion:(int)oAuthVersion;
+- (void)testErrorStatusCodeAndDescription;
 @end

@@ -46,5 +46,6 @@
 - (void) testCount;
 - (void) testCountQuery;
 - (void) testLoginLogout;
+- (void) testProperErrorCode;
 
 @end

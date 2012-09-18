@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.5.4
+* Status code of an error is now available - use 'code' property of NSError.
+* Fix OAuth2 nil info issue.
+
 ## 0.5.3
 * Fix bugs for user based requests
 

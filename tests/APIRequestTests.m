@@ -509,4 +509,18 @@ StackMobSession *mySession = nil;
     [StackMobTestUtils runRunLoop:[NSRunLoop currentRunLoop] untilRequestFinished:request];
 }
 
+- (void) testProperErrorCode
+{
+    StackMobRequest *request = [[StackMob stackmob] get:@"nonexistentschema" withCallback:^(BOOL success, id result) {
+        if (!success) {
+            NSError *theError = (NSError *)result;
+            STAssertTrue([theError code] == 400, @"There should be a proper failure code");
+        }
+        else {
+            STFail(@"Should not succeed");
+        }
+    }];
+    [StackMobTestUtils runRunLoop:[NSRunLoop currentRunLoop] untilRequestFinished:request];
+}
+
 @end

@@ -211,7 +211,7 @@ static SMEnvironment environment;
     
     if (self.session.oauthVersion == OAuth2) {
         [self queueRequest:request andCallback:^(BOOL success, id result) {
-            self.session.oauth2TokenExpiration = [NSDate date];
+            [self.session saveOAuth2AccessToken:nil withExpiration:[NSDate date] andKey:nil];
             callback(success, result);
         }];
 
