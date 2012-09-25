@@ -65,8 +65,6 @@ typedef enum {
 @property(readonly, getter=getURL) NSURL* url;
 @property(nonatomic) BOOL userBased;
 
-+ (NSString*)stringFromHttpVerb:(SMHttpVerb)httpVerb;
-
 /* 
  * Standard CRUD requests
  */
