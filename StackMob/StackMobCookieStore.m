@@ -16,10 +16,11 @@
 
 @interface StackMobCookieStore()
 - (NSMutableDictionary *) initCookies;
+@property (nonatomic, retain) StackMobSession *session;
 @end
 
 @implementation StackMobCookieStore
-
+@synthesize session = _session;
 static NSString *cookieStoreKey;
 
 - (StackMobCookieStore*)initWithSession:(StackMobSession *)session;
@@ -27,6 +28,7 @@ static NSString *cookieStoreKey;
 	if ((self = [super init])) {
 
         cookieStoreKey = [[@"stackmob." stringByAppendingString:[session apiKey]] retain];
+        self.session = session;
 	}
 	return self;
 }
@@ -61,7 +63,9 @@ static NSString *cookieStoreKey;
     BOOL first = YES;
     NSString * cookieString = @"";
     for(NSHTTPCookie *cookie in [cookies allValues]) {
-        if ([[cookie expiresDate] compare:[NSDate date]] != NSOrderedAscending)
+        double cookieExp = [[cookie expiresDate] timeIntervalSince1970];
+        double compareDate = [[self.session getServerTime] timeIntervalSince1970];
+        if (cookieExp > compareDate)
         {
             cookieString = [cookieString stringByAppendingFormat:@"%@%@=%@", (first ? @"" : @";"), [cookie name], [cookie value]];
             first = NO;
@@ -78,5 +82,11 @@ static NSString *cookieStoreKey;
         if([[cookie name] rangeOfString:@"session_"].location == 0) return cookie;
     }
     return nil;
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+    [_session release];
 }
 @end

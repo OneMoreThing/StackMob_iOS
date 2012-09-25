@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.5.5
+* Local Cookie validation not dependent on device date and time.
+
 ## 0.5.4
 * Status code of an error is now available - use 'code' property of NSError.
 * Fix OAuth2 nil info issue.
