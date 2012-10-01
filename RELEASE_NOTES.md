@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.5.6
+* Fix registerWithPush method to handle Boolean overwrite flag.
+
 ## 0.5.5
 * Local Cookie validation not dependent on device date and time.
 
