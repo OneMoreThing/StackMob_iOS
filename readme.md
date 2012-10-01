@@ -1,4 +1,4 @@
-# StackMob iOS SDK v 0.5.5
+# StackMob iOS SDK v 0.5.6
 
 ## Checkout our <a href="https://github.com/stackmob/stackmob-ios-sdk">new iOS SDK v 1.0.0 beta</a>
 This new SDK will be replacing the 0.5.3 SDK in favor of a new direction.  <a href="https://www.stackmob.com/devcenter/docs/iOS-SDK-v1.0-beta">Read all about the new SDK here</a>.
