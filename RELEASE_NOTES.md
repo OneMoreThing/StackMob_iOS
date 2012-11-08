@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.5.7
+* Add new version of Inneractive SDK built for armv7s (Xcode 4.5, iPhone 5)
+
 ## 0.5.6
 * Fix registerWithPush method to handle Boolean overwrite flag.
 
